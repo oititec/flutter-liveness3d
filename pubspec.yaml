@@ -1,10 +1,11 @@
 name: oiti_liveness3d
-description: A new Flutter plugin project.
-version: 0.0.1
-homepage:
+description: A pluggin from Oititec to add Livenees3d on your project.
+version: 1.0.1
+homepage: "https://oititec.com.br/"
+repository: "https://github.com/oititec/flutter-liveness3d"
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
+  sdk: ">=2.19.2 <3.0.0"
   flutter: ">=2.5.0"
 
 dependencies:

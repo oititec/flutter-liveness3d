@@ -23,11 +23,15 @@ abstract class OitiLiveness3dPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
+  /*  Future<String?> getPlatformVersion() {
+    throw UnimplementedError('platformVersion() has not been implemented.');
+  } */
+
+  Future startLiveness(String? baseUrl, String? appKey, bool isProd) {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-  Future startLiveness(String? baseUrl, String? appKey, bool isProd) {
+  Future eventLog(String? event) {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 }

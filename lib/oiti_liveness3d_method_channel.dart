@@ -9,13 +9,13 @@ class MethodChannelOitiLiveness3d extends OitiLiveness3dPlatform {
   @visibleForTesting
   final methodChannel = const MethodChannel('oiti_liveness3d');
 
-  @override
+  /*  @override
   Future<String?> getPlatformVersion() async {
     final version =
         await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
-
+ */
   @override
   Future startLiveness(String? baseUrl, String? appKey, bool isProd) async {
     final result = await methodChannel.invokeMapMethod(
@@ -24,6 +24,20 @@ class MethodChannelOitiLiveness3d extends OitiLiveness3dPlatform {
         'appKey': appKey,
         'baseUrl': baseUrl,
         'isProd': isProd,
+      },
+    );
+
+    return result;
+  }
+
+  @override
+  Future eventLog(
+    String? event,
+  ) async {
+    final result = await methodChannel.invokeMapMethod(
+      'OITI.eventLog',
+      {
+        'event': event,
       },
     );
 

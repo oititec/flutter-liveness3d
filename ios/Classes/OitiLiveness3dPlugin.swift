@@ -45,6 +45,15 @@ public class OitiLiveness3dPlugin: NSObject, FlutterPlugin, Liveness3DDelegate {
                 "Something went wrong. Check Plugin Interface";
                 result(error)
             }
+        case "OITI.eventLog":
+            if let args = call.arguments as? Dictionary<String,Any> {
+                eventLog(args: args)
+            } else {
+                var error:Dictionary<String,Any> = Dictionary();
+                error["message"] =
+                "Something went wrong. Check Plugin Interface";
+                result(error)
+            }
             
         default:
             result(FlutterMethodNotImplemented)
@@ -68,6 +77,11 @@ public class OitiLiveness3dPlugin: NSObject, FlutterPlugin, Liveness3DDelegate {
         liveness3DViewController.delegate = self
         liveness3DViewController.modalPresentationStyle = .fullScreen
         UIApplication.shared.keyWindow?.rootViewController?.present(liveness3DViewController, animated: true, completion: nil)
+        
+    }
+    private func eventLog(args:Dictionary<String,Any>?) {
+        let event = args?["event"] as? String
+        print(event)
         
     }
 }
