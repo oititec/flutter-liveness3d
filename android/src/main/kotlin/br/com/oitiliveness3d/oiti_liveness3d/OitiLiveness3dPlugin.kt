@@ -7,25 +7,14 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import java.util.Objects
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.util.Log
-import androidx.core.app.ActivityCompat
-import androidx.core.content.*
-import br.com.oiti.liveness3d.app.ui.HybridLiveness3DActivity
-import br.com.oiti.liveness3d.data.model.ENVIRONMENT3D
-import br.com.oiti.liveness3d.data.model.Liveness3DTextKey
-import br.com.oiti.liveness3d.data.model.Liveness3DUser
 import br.com.oiti.security.observability.firebase.FirebaseEvents
 import br.com.oitiliveness3d.oiti_liveness3d.utils.AltLiveness3d
 import br.com.oitiliveness3d.oiti_liveness3d.utils.AltLiveness3dException
 
 
-/** OitiLiveness3dPlugin */
 class OitiLiveness3dPlugin: FlutterPlugin, MethodCallHandler {
 
     private lateinit var channel: MethodChannel
@@ -69,7 +58,7 @@ class OitiLiveness3dPlugin: FlutterPlugin, MethodCallHandler {
             resultReference?.error(e.code, e.message, null)
 
         } catch (e: Exception) {
-            resultReference?.error("UNKNOWN_ERROR", e.message, e.stackTrace.toString())
+            resultReference?.error("UNKNOWN_ERROR", e.message, e.stackTrace)
 
         }
     }

@@ -123,12 +123,48 @@ class SecondRoute extends StatelessWidget {
             ),
             Image.asset(
               'assets/images/img_face.png',
-              height: 330,
+              height: 150,
               fit: BoxFit.cover,
             ),
             Expanded(
               flex: 2,
-              child: navigate,
+              child: Container(
+                padding: const EdgeInsets.only(left: 32, right: 32, top: 32),
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(40),
+                    topLeft: Radius.circular(40),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      /*1*/
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          /*2*/
+                          Container(
+                            padding: const EdgeInsets.only(bottom: 8),
+                            child: const Text(
+                              'Reconhecimento Facial',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ),
+                          Text(
+                            'Isso garante que você é você mesmo.',
+                            style: TextStyle(
+                                color: Colors.grey[500], fontSize: 12),
+                          ),
+                        ],
+                      ),
+                    ),
+                    /*3*/
+                  ],
+                ),
+              ),
             ),
             Expanded(
               child: info1,
@@ -191,7 +227,7 @@ class SecondRoute extends StatelessWidget {
 
               Image.asset(
                 'assets/images/left-arrow.png',
-                height: 40,
+                height: 22,
                 fit: BoxFit.cover,
               ),
             ],
@@ -203,7 +239,8 @@ class SecondRoute extends StatelessWidget {
 
   @override
   Widget info1 = Container(
-    padding: const EdgeInsets.only(right: 32, left: 32),
+    padding: const EdgeInsets.only(right: 32, left: 32, bottom: 5, top: 5),
+    margin: const EdgeInsets.only(top: 0),
     decoration: const BoxDecoration(
       color: Color.fromARGB(255, 255, 255, 255),
     ),
@@ -238,7 +275,7 @@ class SecondRoute extends StatelessWidget {
               Expanded(
                 child: Text(
                   'Escolha um ambiente bem iluminado.',
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 22),
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
                 ),
               ),
             ],
@@ -250,7 +287,7 @@ class SecondRoute extends StatelessWidget {
 
   @override
   Widget info2 = Container(
-    padding: const EdgeInsets.only(right: 32, left: 32),
+    padding: const EdgeInsets.only(right: 32, left: 32, bottom: 5, top: 5),
     decoration: const BoxDecoration(
       color: Color.fromARGB(255, 255, 255, 255),
     ),
@@ -284,7 +321,7 @@ class SecondRoute extends StatelessWidget {
               Expanded(
                 child: Text(
                   'Não use acessórios como bonés, máscaras e afins.',
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 22),
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
                 ),
               ),
             ],
@@ -296,7 +333,7 @@ class SecondRoute extends StatelessWidget {
 
   @override
   Widget navigate = Container(
-    padding: const EdgeInsets.all(32),
+    padding: const EdgeInsets.only(left: 32, right: 32, top: 32),
     decoration: const BoxDecoration(
       color: Color.fromARGB(255, 255, 255, 255),
       borderRadius: BorderRadius.only(
@@ -316,12 +353,12 @@ class SecondRoute extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 8),
                 child: const Text(
                   'Reconhecimento Facial',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
               Text(
                 'Isso garante que você é você mesmo.',
-                style: TextStyle(color: Colors.grey[500], fontSize: 22),
+                style: TextStyle(color: Colors.grey[500], fontSize: 12),
               ),
             ],
           ),
@@ -437,7 +474,7 @@ class PermissionRoute extends StatelessWidget {
 
               Image.asset(
                 'assets/images/left-arrow-b.png',
-                height: 40,
+                height: 22,
                 fit: BoxFit.cover,
               ),
             ],
@@ -472,7 +509,7 @@ class PermissionRoute extends StatelessWidget {
                         "Permissões da câmera desativadas.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontWeight: FontWeight.w700, fontSize: 34),
+                            fontWeight: FontWeight.w700, fontSize: 22),
                       ),
                     ),
                   ),
@@ -508,7 +545,7 @@ class PermissionRoute extends StatelessWidget {
                         "Habilitar as configurações do seu sistema operacional.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 22),
+                            fontWeight: FontWeight.w400, fontSize: 14),
                       ),
                     ),
                   ),
