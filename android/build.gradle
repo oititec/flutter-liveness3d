@@ -51,6 +51,6 @@ android {
 }
 
 dependencies {
-    implementation 'br.com.oiti:liveness3d-sdk:6.7.1'
+    implementation 'br.com.oiti:liveness3d-sdk:7.1.0'
     implementation 'br.com.oiti:security:1.2'
 }

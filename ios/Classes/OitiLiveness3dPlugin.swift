@@ -1,6 +1,6 @@
 import Flutter
 import UIKit
-import FaceCaptcha
+import OILiveness3D
 
 public class OitiLiveness3dPlugin: NSObject, FlutterPlugin, Liveness3DDelegate {
    
@@ -10,7 +10,7 @@ public class OitiLiveness3dPlugin: NSObject, FlutterPlugin, Liveness3DDelegate {
         self.result?(FlutterError(code: "USER_CANCELLED", message: "USER_CANCELLED", details: nil))
     }
     
-    public func handleLiveness3DValidation(validateModel: FaceCaptcha.Liveness3DSuccess) {
+    public func handleLiveness3DValidation(validateModel: Liveness3DSuccess) {
         var response:Dictionary<String,Any> = Dictionary();
         response["cause"] = validateModel.cause ?? "";
         response["codId"] = validateModel.codID ?? 0;
@@ -20,9 +20,8 @@ public class OitiLiveness3dPlugin: NSObject, FlutterPlugin, Liveness3DDelegate {
         self.result?(response)
     }
 
-    public func handleLiveness3DError(error: FaceCaptcha.Liveness3DError) {
-        let errorCode: String = error.errorCode == Liveness3DErrorCode.LIVENESS_NOT_COMPLETED ? "LIVENESS_NOT_COMPLETED" : error.errorCode.rawValue
-        self.result?(FlutterError(code: errorCode, message: error.errorMessage, details: nil))
+    public func handleLiveness3DError(error: Liveness3DError) {
+        self.result?(FlutterError(code: String(error.code), message: error.message, details: nil))
     }
     
     
@@ -65,23 +64,21 @@ public class OitiLiveness3dPlugin: NSObject, FlutterPlugin, Liveness3DDelegate {
         let appKey = args?["appKey"] as? String
         let baseUrl = args?["baseUrl"] as? String
         let isProd = args?["isProd"] as? Bool
-        let baseUrlWithoutPath = "https://" + (baseUrl?.components(separatedBy: "/")[2] ?? "")
-        let env: Environment3D = isProd == true ? Environment3D.PRD : Environment3D.HML
+        let env: Environment = isProd == true ? Environment.PRD: Environment.HML
         
         let liveness3DViewController = Liveness3DViewController(
-            endpoint: baseUrlWithoutPath,
             liveness3DUser: Liveness3DUser(appKey: appKey!, environment: env),
-            debugOn: false
+            delegate: self
         )
         
-        liveness3DViewController.delegate = self
+
         liveness3DViewController.modalPresentationStyle = .fullScreen
         UIApplication.shared.keyWindow?.rootViewController?.present(liveness3DViewController, animated: true, completion: nil)
         
     }
     private func eventLog(args:Dictionary<String,Any>?) {
         let event = args?["event"] as? String
-        print(event)
+        print(event as Any)
         
     }
 }
