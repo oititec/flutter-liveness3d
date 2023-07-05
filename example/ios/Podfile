@@ -3,7 +3,7 @@ platform :ios, '12.4'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
-source 'https://github.com/oititec/liveness-ios-specs.git'
+source 'https://github.com/oititec/ios-artifactory.git'
 
 project 'Runner', {
   'Debug' => :debug,
