@@ -11,7 +11,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_redux: ^0.10.0
+  flutter_screenutil: ^5.7.0
   plugin_platform_interface: ^2.0.2
+  redux: ^5.0.0
 
 dev_dependencies:
   flutter_test:

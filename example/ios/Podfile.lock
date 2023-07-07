@@ -13,6 +13,7 @@ PODS:
     - OICommons (~> 1.1.0)
   - oiti_liveness3d (0.0.1):
     - Flutter
+    - OIComponents (= 1.2.0)
     - OILiveness3D (= 1.0.1-beta)
 
 DEPENDENCIES:
@@ -40,7 +41,7 @@ SPEC CHECKSUMS:
   OILiveness3D: 40b935f97540317e8a350350d2a138987384fa8b
   OILiveness3D_FT: 3690953c83894ae5706e8fac07894e0866a6790c
   OINetwork: 3cf1ea4bd61a98bd68db7d1caa3f175b4868f5b4
-  oiti_liveness3d: c991c4dc0e8dfb164d7207de9b21eb24095a6131
+  oiti_liveness3d: a273754fa7743d33018a933385160da2ccee8538
 
 PODFILE CHECKSUM: 7087fd2174588fcd196392818c34ba0b6eafa3fd
 
