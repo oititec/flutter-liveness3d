@@ -1,0 +1,1 @@
+enum ActionsStore { increment, decrement }

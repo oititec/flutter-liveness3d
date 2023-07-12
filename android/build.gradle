@@ -6,6 +6,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+
     }
 
     dependencies {
@@ -19,13 +20,16 @@ allprojects {
         google()
         mavenCentral()
     }
+
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
+
+
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -41,6 +45,12 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21
     }
+
+}
+
+dependencies {
+    implementation 'br.com.oiti:liveness3d-sdk:7.1.0'
+    implementation 'br.com.oiti:security:1.2'
 }

@@ -1,1 +1,9 @@
 rootProject.name = 'oiti_liveness3d'
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://raw.githubusercontent.com/oititec/android-oiti-versions-beta/master" }
+    }
+}

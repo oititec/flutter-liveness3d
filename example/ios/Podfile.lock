@@ -1,20 +1,32 @@
 PODS:
-  - FaceCaptcha (4.0.7):
-    - OILiveness3D_FT (~> 9.6.10)
   - Flutter (1.0.0)
-  - OILiveness3D_FT (9.6.10)
+  - OICommons (1.1.0)
+  - OIComponents (1.2.0):
+    - OICommons (~> 1.1.0)
+  - OILiveness3D (1.0.1-beta):
+    - OICommons (~> 1.1.0)
+    - OIComponents (~> 1.2.0)
+    - OILiveness3D_FT (= 9.6.40-beta)
+    - OINetwork (~> 1.2.0)
+  - OILiveness3D_FT (9.6.40-beta)
+  - OINetwork (1.2.0):
+    - OICommons (~> 1.1.0)
   - oiti_liveness3d (0.0.1):
-    - FaceCaptcha (~> 4.0.4)
     - Flutter
+    - OIComponents (= 1.2.0)
+    - OILiveness3D (= 1.0.1-beta)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - oiti_liveness3d (from `.symlinks/plugins/oiti_liveness3d/ios`)
 
 SPEC REPOS:
-  https://github.com/oititec/liveness-ios-specs.git:
-    - FaceCaptcha
+  https://github.com/oititec/ios-artifactory.git:
+    - OICommons
+    - OIComponents
+    - OILiveness3D
     - OILiveness3D_FT
+    - OINetwork
 
 EXTERNAL SOURCES:
   Flutter:
@@ -23,11 +35,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/oiti_liveness3d/ios"
 
 SPEC CHECKSUMS:
-  FaceCaptcha: 4864e93131982356e1dd354aad4e7301c072862c
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  OILiveness3D_FT: c2b3b70fbd86e2fd5efc58f47d32b0aead995ae1
-  oiti_liveness3d: de88c652a8e7bea46dc230361161a177fddb2c50
+  OICommons: c304a4f3aa3f0fe9282eae013a45fde717ad42bf
+  OIComponents: 47993622952e7ad082b34c3bdd484ca217487aff
+  OILiveness3D: 40b935f97540317e8a350350d2a138987384fa8b
+  OILiveness3D_FT: 3690953c83894ae5706e8fac07894e0866a6790c
+  OINetwork: 3cf1ea4bd61a98bd68db7d1caa3f175b4868f5b4
+  oiti_liveness3d: a273754fa7743d33018a933385160da2ccee8538
 
-PODFILE CHECKSUM: 561365c71bd82e1cf3e458f78d69bed722a04802
+PODFILE CHECKSUM: 7087fd2174588fcd196392818c34ba0b6eafa3fd
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.0
