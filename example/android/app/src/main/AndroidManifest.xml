@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.oitiliveness3d.oiti_liveness3d_example">
+    package="br.com.oitiliveness3d.oiti_liveness3d_example"
+    android:name=".utils.CustomApplication"
+    >
    <application
         android:label="oiti_liveness3d_example"
         android:name="${applicationName}"
