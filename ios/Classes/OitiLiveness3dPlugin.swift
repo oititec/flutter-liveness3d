@@ -94,7 +94,7 @@ public class OitiLiveness3dPlugin: NSObject, FlutterPlugin, Liveness3DDelegate {
         let env: Environment = isProd == true ? Environment.PRD: Environment.HML
       
         let typeLoading = loading?["type"] as? String ?? "default"
-        let sizeLoading = loading?["size"] as? CGFloat ?? 1
+        let sizeLoading = loading?["size"] as? Int ?? 1
         let backgroundColor = loading?["backgroundColor"] as? String ?? "#FFFFFF"
         let loadingColor = loading?["loadingColor"] as? String ?? "#000000"
         
@@ -117,13 +117,15 @@ public class OitiLiveness3dPlugin: NSObject, FlutterPlugin, Liveness3DDelegate {
                     delegate: self,
                     customAppearance: .init(configuration: LoadingConfig)
                 )
+                
                 liveness3DViewController.modalPresentationStyle = .fullScreen
                 UIApplication.shared.keyWindow?.rootViewController?.present(liveness3DViewController, animated: true, completion: nil)
+                
             }else {
                 let LoadingConfig = ActivityIndicatorConfiguration(
                     loadingColor: .init(hex: loadingColor),
-                    backgroundColor: .init(hex: backgroundColor)
-                  //  scaleFactor: sizeLoading
+                    backgroundColor: .init(hex: backgroundColor),
+                    scaleFactor: sizeLoading
                 )
                 
                 let liveness3DViewController = HybridLiveness3DViewController(
