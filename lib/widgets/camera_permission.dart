@@ -1,40 +1,40 @@
-import 'package:flutter/material.dart';
-import '../oiti_liveness3d.dart';
-import 'package:redux/redux.dart';
-import '../store/reducer.dart';
+import 'dart:io';
 
-class PermissionScreen extends StatelessWidget {
-  PermissionScreen({Key? key, this.store, this.appKey, this.loading})
-      : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:oiti_liveness3d/oiti_liveness3d.dart';
+import 'package:redux/redux.dart';
+
+class CameraPermissionWidget extends StatelessWidget {
   final Store<int>? store;
-  final String? appKey;
-  final Object? loading;
+  var _canCloseWidget = false;
+  final _channel = OitiLiveness3d();
+
+  CameraPermissionWidget({Key? key, this.store}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    OitiLiveness3d.eventLog("STATE_L3FT_permissionView");
+    _channel.eventLog("STATE_L3FT_permissionView");
+
     return MaterialApp(
       title: 'Flutter layout demo',
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         extendBodyBehindAppBar: true,
         appBar: null,
         body: Column(
           children: [
             ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: titleSection,
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.only(top: 30),
                 elevation: 5,
-                primary: Colors.transparent,
+                backgroundColor: Colors.transparent,
                 shadowColor: Colors.transparent.withOpacity(0.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
+              onPressed: () => Navigator.pop(context),
+              child: titleSection,
             ),
             Image.asset(
               'assets/images/camera_alt.png',
@@ -49,7 +49,7 @@ class PermissionScreen extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.all(32),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 255, 255, 255),
               ),
               child: Row(
@@ -57,21 +57,10 @@ class PermissionScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () async {
-                      final appKey = '';
-                      try {
-                        OitiLiveness3d.eventLog("ACTION_L3FT_permissionVerify");
-                        await OitiLiveness3d.verifyPermission(
-                            context, this.appKey, loading);
-                      } catch (e) {
-                        print(e.toString());
-                      }
-                    },
-                    child: const Text("Verificar"),
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.only(
                           top: 15, bottom: 15, left: 100, right: 100),
-                      primary: Color.fromARGB(255, 0, 180, 12),
+                      backgroundColor: const Color.fromARGB(255, 0, 180, 12),
                       shadowColor: Colors.transparent.withOpacity(0.0),
                       textStyle: const TextStyle(
                           fontSize: 20,
@@ -81,6 +70,27 @@ class PermissionScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(25),
                       ),
                     ),
+                    onPressed: () {
+                      try {
+                        _channel.eventLog("ACTION_L3FT_permissionVerify");
+                        _channel.askPermission().then((granted) {
+                          _canCloseWidget = false;
+                          if (!granted && Platform.isIOS) {
+                            _showAlertDialog(context).whenComplete(() {
+                              if (_canCloseWidget) {
+                                Navigator.pop(context);
+                              }
+                            });
+                          } else {
+                            Navigator.pop(context);
+                          }
+                        });
+                      } catch (e) {
+                        print(e.toString());
+                        Navigator.pop(context);
+                      }
+                    },
+                    child: const Text("Verificar"),
                   ),
                 ],
               ),
@@ -188,4 +198,36 @@ class PermissionScreen extends StatelessWidget {
       ],
     ),
   );
+
+  Future<void> _showAlertDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Precisamos acessar sua câmera'),
+          content: const Text(
+              'Em seu aparelho, vá em Ajustes e habilite o uso da câmera.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Fechar'),
+              onPressed: () {
+                _canCloseWidget = true;
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Ajustes'),
+              onPressed: () {
+                _canCloseWidget = false;
+                _channel
+                    .openSettings()
+                    .whenComplete(() => Navigator.of(context).pop());
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }

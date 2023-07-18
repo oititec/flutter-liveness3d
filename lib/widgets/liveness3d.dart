@@ -1,19 +1,34 @@
 import 'package:flutter/material.dart';
-import '../oiti_liveness3d.dart';
-import './permission_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:oiti_liveness3d/widgets/camera_permission.dart';
+import 'package:oiti_liveness3d/widgets/components/info_card.dart';
 import 'package:redux/redux.dart';
+import 'package:oiti_liveness3d/oiti_liveness3d.dart';
+import 'package:oiti_liveness3d/common/enumerations.dart';
+import 'package:oiti_liveness3d/common/loading_appearance.dart';
+import 'package:oiti_liveness3d/common/texts_builder.dart';
 
-class InstructionScreen extends StatelessWidget {
-  InstructionScreen({Key? key, this.store, this.appKey, this.loading})
-      : super(key: key);
+class Liveness3DWidget extends StatelessWidget {
   final Store<int>? store;
-  final String? appKey;
-  final Object? loading;
+  final String appKey;
+  final Environment environment;
+  final TextsBuilder? textsBuilder;
+  final LoadingAppearence? loadingAppearance;
+  final OitiLiveness3d _channel = OitiLiveness3d();
+
+  Liveness3DWidget(
+      {Key? key,
+      this.store,
+      required this.appKey,
+      required this.environment,
+      this.textsBuilder,
+      this.loadingAppearance})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    OitiLiveness3d.eventLog("STATE_L3FT_instructionView");
+    _channel.eventLog("STATE_L3FT_instructionView");
+
     return ScreenUtilInit(
         minTextAdapt: true,
         splitScreenMode: true,
@@ -23,27 +38,27 @@ class InstructionScreen extends StatelessWidget {
                 return MediaQuery(
                     data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
                     child: Scaffold(
-                      backgroundColor: Color.fromRGBO(22, 72, 205, 1),
+                      backgroundColor: const Color.fromRGBO(22, 72, 205, 1),
                       extendBodyBehindAppBar: true,
                       appBar: null,
                       body: Column(
                         children: [
                           ElevatedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              OitiLiveness3d.eventLog(
-                                  "ACTION_L3FT_instructionContinue");
-                            },
-                            child: titleSection,
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.only(top: 30),
                               elevation: 5,
-                              primary: Colors.transparent,
+                              backgroundColor: Colors.transparent,
                               shadowColor: Colors.transparent.withOpacity(0.0),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                              _channel
+                                  .eventLog("ACTION_L3FT_instructionContinue");
+                            },
+                            child: titleSection,
                           ),
                           Image.asset(
                             'assets/images/img_face.png',
@@ -88,14 +103,20 @@ class InstructionScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  Expanded(
+                                  const Expanded(
                                     flex: 1,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
-                                      children: [info1, info2],
+                                      children: [
+                                        InfoCardWidget(
+                                            'assets/images/lightbulb_outline.png',
+                                            'Escolha um ambiente bem iluminado.'),
+                                        InfoCardWidget('assets/images/face.png',
+                                            'Não use acessórios como bonés, máscaras e afins.'),
+                                      ],
                                     ),
                                   )
                                   /*3*/
@@ -106,7 +127,7 @@ class InstructionScreen extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.only(
                                 top: 0, bottom: 32, left: 32, right: 32),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Color.fromARGB(255, 255, 255, 255),
                             ),
                             child: Row(
@@ -114,18 +135,14 @@ class InstructionScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 ElevatedButton(
-                                  onPressed: () {
-                                    OitiLiveness3d.checkScreen(
-                                        context, appKey, loading);
-                                  },
-                                  child: const Text("Continuar"),
                                   style: ElevatedButton.styleFrom(
                                     padding: const EdgeInsets.only(
                                         top: 15,
                                         bottom: 15,
                                         left: 100,
                                         right: 100),
-                                    primary: Color.fromARGB(255, 0, 180, 12),
+                                    backgroundColor:
+                                        const Color.fromARGB(255, 0, 180, 12),
                                     shadowColor:
                                         Colors.transparent.withOpacity(0.0),
                                     textStyle: const TextStyle(
@@ -136,6 +153,8 @@ class InstructionScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(25),
                                     ),
                                   ),
+                                  onPressed: () => _continueAction(context),
+                                  child: const Text("Continuar"),
                                 ),
                               ],
                             ),
@@ -145,6 +164,27 @@ class InstructionScreen extends StatelessWidget {
                     ));
               },
             ));
+  }
+
+  void _continueAction(BuildContext context) {
+    _channel.checkPermission().then((authorized) => {
+          if (authorized)
+            {
+              _channel.openLiveness3D(
+                  appKey: appKey,
+                  environment: environment,
+                  textsBuilder: textsBuilder,
+                  loading: loadingAppearance)
+            }
+          else
+            {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CameraPermissionWidget(store: store)),
+              )
+            }
+        });
   }
 
   Widget titleSection = Container(
@@ -162,100 +202,6 @@ class InstructionScreen extends StatelessWidget {
                 'assets/images/left-arrow.png',
                 height: 22,
                 fit: BoxFit.cover,
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
-
-  @override
-  Widget info1 = Container(
-    padding: const EdgeInsets.only(bottom: 5, top: 5),
-    margin: const EdgeInsets.only(top: 0),
-    decoration: const BoxDecoration(
-      color: Color.fromARGB(0, 255, 255, 255),
-    ),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(right: 15, top: 0),
-          padding: const EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 245, 245, 245),
-            borderRadius: BorderRadius.circular(100),
-            border: Border.all(
-              width: 1,
-              color: const Color.fromARGB(255, 224, 224, 224),
-              style: BorderStyle.solid,
-            ),
-          ),
-          child: Image.asset(
-            'assets/images/lightbulb_outline.png',
-            height: 32,
-            fit: BoxFit.cover,
-          ),
-        ),
-        Expanded(
-          /*1*/
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
-              /*2*/
-              Expanded(
-                child: Text(
-                  'Escolha um ambiente bem iluminado.',
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
-
-  @override
-  Widget info2 = Container(
-    padding: const EdgeInsets.only(bottom: 5, top: 5),
-    decoration: const BoxDecoration(
-      color: Color.fromARGB(255, 255, 255, 255),
-    ),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(right: 15),
-          padding: const EdgeInsets.all(15),
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 245, 245, 245),
-            borderRadius: BorderRadius.circular(100),
-            border: Border.all(
-              width: 1,
-              color: Color.fromARGB(255, 224, 224, 224),
-              style: BorderStyle.solid,
-            ),
-          ),
-          child: Image.asset(
-            'assets/images/face.png',
-            height: 32,
-            fit: BoxFit.cover,
-          ),
-        ),
-        Expanded(
-          /*1*/
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
-              /*2*/
-              Expanded(
-                child: Text(
-                  'Não use acessórios como bonés, máscaras e afins.',
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
-                ),
               ),
             ],
           ),
@@ -301,3 +247,5 @@ class InstructionScreen extends StatelessWidget {
     ),
   );
 }
+
+
