@@ -16,22 +16,22 @@ extension OitiLiveness3dPlugin {
             .present(viewController, animated: animated, completion: completion)
     }
     
-    func finishChannel(error: Liveness3DError, result: @escaping FlutterResult) {
+    func finishChannel(error: Liveness3DError, result: FlutterResult?) {
         let flutterError = FlutterError(
             code: String(error.code),
             message: error.message,
             details: nil
         )
-        result(flutterError)
+        result?(flutterError)
     }
     
-    func finishChannel(error code: Liveness3DErrorCode, result: @escaping FlutterResult) {
+    func finishChannel(error code: Liveness3DErrorCode, result: FlutterResult?) {
         let flutterError = FlutterError(
             code: String(code.code),
             message: code.message,
             details: nil
         )
-        result(flutterError)
+        result?(flutterError)
     }
     
     func textKey(from identifier: String) -> Liveness3DTextKey? {

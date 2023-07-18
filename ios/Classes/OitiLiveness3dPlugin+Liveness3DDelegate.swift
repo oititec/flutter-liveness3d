@@ -23,8 +23,6 @@ extension OitiLiveness3dPlugin: Liveness3DDelegate {
     }
     
     public func handleLiveness3DError(error: Liveness3DError) {
-        if let result = result {
-            finishChannel(error: error, result: result)
-        }
+        finishChannel(error: error, result: result)
     }
 }

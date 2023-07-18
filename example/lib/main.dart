@@ -19,8 +19,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  late TextEditingController _controller;
   final _oitiLiveness3DPlugin = OitiLiveness3d();
-  final appKey = 'APP_KEY';
+  var appKey = '';
   final environment = Environment.hml;
   final acitivityLoading = LoadingAppearence(
       type: LoadingType.activity,
@@ -34,6 +35,18 @@ class _MyAppState extends State<MyApp> {
       loadingColor: "#FFFFFF");
 
   @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
@@ -43,23 +56,20 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: Column(
             children: [
-              ElevatedButton(
-                  onPressed: () => _pushLiveness3DWidget(context),
-                  child: const Text("Default")),
-              ElevatedButton(
-                  onPressed: () =>
-                      _pushLiveness3DWidget(context, loading: spinnerLoading),
-                  child: const Text("Spinner Loading")),
-              ElevatedButton(
-                  onPressed: () =>
-                      _pushLiveness3DWidget(context, loading: acitivityLoading),
-                  child: const Text("Activity Loading")),
-              ElevatedButton(
-                  onPressed: () {
-                    final builder = _textsCustomization();
-                    _pushLiveness3DWidget(context, builder: builder);
-                  },
-                  child: const Text("Custom Texts")),
+              _liveness3DWidgetOption(context, 'Default'),
+              _liveness3DWidgetOption(context, 'Spinner Loading',
+                  loading: spinnerLoading),
+              _liveness3DWidgetOption(context, 'Activity Loading',
+                  loading: acitivityLoading),
+              _liveness3DWidgetOption(context, 'Custom Texts',
+                  builder: _textsCustomization()),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child:
+                    Text(appKey.isEmpty ? 'AppKey vazia' : 'AppKey disponivel'),
+              ),
+              appKeySection()
             ],
           ),
         ),
@@ -67,16 +77,44 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  _pushLiveness3DWidget(BuildContext context,
+  Widget _liveness3DWidgetOption(BuildContext context, String title,
       {TextsBuilder? builder, LoadingAppearence? loading}) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => _oitiLiveness3DPlugin.createLiveness3DWidget(
-                appKey: appKey,
-                environment: environment,
-                textsBuilder: builder,
-                loadingAppearance: loading)));
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 5),
+      child: ElevatedButton(
+          style:
+              ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50)),
+          onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      _oitiLiveness3DPlugin.createLiveness3DWidget(
+                          appKey: appKey,
+                          environment: environment,
+                          textsBuilder: builder,
+                          loadingAppearance: loading))),
+          child: Text(title)),
+    );
+  }
+
+  Widget appKeySection() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 45),
+      child: TextField(
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(),
+          labelText: 'App Key',
+        ),
+        obscureText: false,
+        controller: _controller,
+        onSubmitted: (value) => _pasteAppKey(),
+      ),
+    );
+  }
+
+  _pasteAppKey() {
+    setState(() => appKey = _controller.text);
+    _controller.text = '';
   }
 
   TextsBuilder _textsCustomization() {
