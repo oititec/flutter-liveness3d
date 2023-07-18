@@ -21,7 +21,17 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final _oitiLiveness3DPlugin = OitiLiveness3d();
   final appKey = 'APP_KEY';
-  final loading = LoadingAppearence(type: LoadingType.spinner, size: 5);
+  final environment = Environment.hml;
+  final acitivityLoading = LoadingAppearence(
+      type: LoadingType.activity,
+      size: 2,
+      backgroundColor: "#FFFFFF",
+      loadingColor: "#000000");
+  final spinnerLoading = LoadingAppearence(
+      type: LoadingType.spinner,
+      size: 7,
+      backgroundColor: "#000000",
+      loadingColor: "#FFFFFF");
 
   @override
   Widget build(BuildContext context) {
@@ -34,26 +44,39 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             children: [
               ElevatedButton(
+                  onPressed: () => _pushLiveness3DWidget(context),
+                  child: const Text("Default")),
+              ElevatedButton(
+                  onPressed: () =>
+                      _pushLiveness3DWidget(context, loading: spinnerLoading),
+                  child: const Text("Spinner Loading")),
+              ElevatedButton(
+                  onPressed: () =>
+                      _pushLiveness3DWidget(context, loading: acitivityLoading),
+                  child: const Text("Activity Loading")),
+              ElevatedButton(
                   onPressed: () {
                     final builder = _textsCustomization();
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              _oitiLiveness3DPlugin.createLiveness3DWidget(
-                                  appKey: appKey,
-                                  environment: Environment.hml,
-                                  textsBuilder: builder,
-                                  loadingAppearance: loading)),
-                    );
+                    _pushLiveness3DWidget(context, builder: builder);
                   },
-                  child: const Text("Liveness 3D"))
+                  child: const Text("Custom Texts")),
             ],
           ),
         ),
       ),
     );
+  }
+
+  _pushLiveness3DWidget(BuildContext context,
+      {TextsBuilder? builder, LoadingAppearence? loading}) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => _oitiLiveness3DPlugin.createLiveness3DWidget(
+                appKey: appKey,
+                environment: environment,
+                textsBuilder: builder,
+                loadingAppearance: loading)));
   }
 
   TextsBuilder _textsCustomization() {
