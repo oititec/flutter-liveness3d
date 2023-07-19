@@ -24,15 +24,19 @@ class _MyAppState extends State<MyApp> {
   var appKey = '';
   final environment = Environment.hml;
   final acitivityLoading = LoadingAppearence(
-      type: LoadingType.activity,
-      size: 2,
-      backgroundColor: "#FFFFFF",
-      loadingColor: "#000000");
+    type: LoadingType.activity,
+    size: 2,
+    backgroundColor: "#FFFFFF",
+    loadingColor: "#000000",
+  );
   final spinnerLoading = LoadingAppearence(
-      type: LoadingType.spinner,
-      size: 7,
-      backgroundColor: "#000000",
-      loadingColor: "#FFFFFF");
+    type: LoadingType.spinner,
+    size: 7,
+    backgroundColor: "#000000",
+    loadingColor: "#FFFFFF",
+  );
+  var resultTitle = '';
+  var resultContent = '';
 
   @override
   void initState() {
@@ -56,20 +60,36 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: Column(
             children: [
-              _liveness3DWidgetOption(context, 'Default'),
-              _liveness3DWidgetOption(context, 'Spinner Loading',
-                  loading: spinnerLoading),
-              _liveness3DWidgetOption(context, 'Activity Loading',
-                  loading: acitivityLoading),
-              _liveness3DWidgetOption(context, 'Custom Texts',
-                  builder: _textsCustomization()),
+              _liveness3DWidgetOption(
+                context,
+                'Default',
+              ),
+              _liveness3DWidgetOption(
+                context,
+                'Spinner Loading',
+                loading: spinnerLoading,
+              ),
+              _liveness3DWidgetOption(
+                context,
+                'Activity Loading',
+                loading: acitivityLoading,
+              ),
+              _liveness3DWidgetOption(
+                context,
+                'Custom Texts',
+                builder: _textsCustomization(),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Text(resultContent),
+              ),
               const Spacer(),
               Padding(
                 padding: const EdgeInsets.all(10),
                 child:
                     Text(appKey.isEmpty ? 'AppKey vazia' : 'AppKey disponivel'),
               ),
-              appKeySection()
+              appKeySection(),
             ],
           ),
         ),
@@ -77,23 +97,39 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  Widget _liveness3DWidgetOption(BuildContext context, String title,
-      {TextsBuilder? builder, LoadingAppearence? loading}) {
+  Widget _liveness3DWidgetOption(
+    BuildContext context,
+    String title, {
+    TextsBuilder? builder,
+    LoadingAppearence? loading,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 5),
       child: ElevatedButton(
-          style:
-              ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50)),
-          onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      _oitiLiveness3DPlugin.createLiveness3DWidget(
-                          appKey: appKey,
-                          environment: environment,
-                          textsBuilder: builder,
-                          loadingAppearance: loading))),
-          child: Text(title)),
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size.fromHeight(50),
+        ),
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => _oitiLiveness3DPlugin.createLiveness3DWidget(
+              appKey: appKey,
+              environment: environment,
+              textsBuilder: builder,
+              loadingAppearance: loading,
+              onSuccess: (result) => _onLiveness3DSuccess(result),
+              onError: (error) => _onLiveness3DError(error),
+            ),
+          ),
+        ).whenComplete(
+          () => _showAlertDialog(
+            context,
+            resultTitle,
+            resultContent,
+          ),
+        ),
+        child: Text(title),
+      ),
     );
   }
 
@@ -154,5 +190,37 @@ class _MyAppState extends State<MyApp> {
       ..feedbackNeutralExpression = 'feedback_neutral_expression'
       ..feedbackConditionsTooBright = 'feedback_conditions_too_bright'
       ..feedbackBrightenYourEnvironment = 'feedback_brighten_your_environment';
+  }
+
+  Future<void> _showAlertDialog(
+      BuildContext context, String resultType, String content) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Resultado: $resultType'),
+          content: Text(content),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  /// Liveness 3D Callbacks
+  _onLiveness3DSuccess(LivenessSuccessResult result) {
+    resultTitle = 'Sucesso';
+    resultContent =
+        'Valid: ${result.valid}\nCodID: ${result.codId}\nCause: ${result.cause}\nProtocol: ${result.protocol}\nScan Result Blob: ${result.scanResultBlob}\n';
+  }
+
+  _onLiveness3DError(Object? error) {
+    resultTitle = 'Sucesso';
+    resultContent = 'Cause: ${error.toString()}';
   }
 }

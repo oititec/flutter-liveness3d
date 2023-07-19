@@ -9,7 +9,10 @@ class CameraPermissionWidget extends StatelessWidget {
   var _canCloseWidget = false;
   final _channel = OitiLiveness3d();
 
-  CameraPermissionWidget({Key? key, this.store}) : super(key: key);
+  CameraPermissionWidget({
+    Key? key,
+    this.store,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +62,18 @@ class CameraPermissionWidget extends StatelessWidget {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.only(
-                          top: 15, bottom: 15, left: 100, right: 100),
+                        top: 15,
+                        bottom: 15,
+                        left: 100,
+                        right: 100,
+                      ),
                       backgroundColor: const Color.fromARGB(255, 0, 180, 12),
                       shadowColor: Colors.transparent.withOpacity(0.0),
                       textStyle: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Color.fromARGB(255, 0, 0, 0)),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -73,18 +81,22 @@ class CameraPermissionWidget extends StatelessWidget {
                     onPressed: () {
                       try {
                         _channel.eventLog("ACTION_L3FT_permissionVerify");
-                        _channel.askPermission().then((granted) {
-                          _canCloseWidget = false;
-                          if (!granted && Platform.isIOS) {
-                            _showAlertDialog(context).whenComplete(() {
-                              if (_canCloseWidget) {
-                                Navigator.pop(context);
-                              }
-                            });
-                          } else {
-                            Navigator.pop(context);
-                          }
-                        });
+                        _channel.askPermission().then(
+                          (granted) {
+                            _canCloseWidget = false;
+                            if (!granted && Platform.isIOS) {
+                              _showAlertDialog(context).whenComplete(
+                                () {
+                                  if (_canCloseWidget) {
+                                    Navigator.pop(context);
+                                  }
+                                },
+                              );
+                            } else {
+                              Navigator.pop(context);
+                            }
+                          },
+                        );
                       } catch (e) {
                         print(e.toString());
                         Navigator.pop(context);
@@ -101,18 +113,14 @@ class CameraPermissionWidget extends StatelessWidget {
     );
   }
 
-  @override
   Widget titleSection = Container(
     padding: const EdgeInsets.all(32),
     child: Row(
       children: [
         Expanded(
-          /*1*/
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /*2*/
-
               Image.asset(
                 'assets/images/left-arrow-b.png',
                 height: 22,
@@ -125,77 +133,73 @@ class CameraPermissionWidget extends StatelessWidget {
     ),
   );
 
-  @override
   Widget permissionDesc = Container(
-    padding: const EdgeInsets.only(right: 32, left: 32),
+    padding: const EdgeInsets.only(
+      right: 32,
+      left: 32,
+    ),
     decoration: const BoxDecoration(
       color: Color.fromARGB(255, 255, 255, 255),
     ),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          child: Expanded(
-            /*1*/
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                /*2*/
-                Expanded(
-                  child: new Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(
-                        "Permissões da câmera desativadas.",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700, fontSize: 22),
+        Expanded(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: const Text(
+                      "Permissões da câmera desativadas.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 22,
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ],
     ),
   );
 
-  @override
   Widget permissionDesc2 = Container(
-    padding: const EdgeInsets.only(right: 32, left: 32),
+    padding: const EdgeInsets.only(
+      right: 32,
+      left: 32,
+    ),
     decoration: const BoxDecoration(
       color: Color.fromARGB(255, 255, 255, 255),
     ),
-    child: Row(
-      children: [
-        Container(
-          child: Expanded(
-            /*1*/
-            child: Row(
-              children: [
-                /*2*/
-                Expanded(
-                  child: new Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(
-                        "Habilitar as configurações do seu sistema operacional.",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 14),
-                      ),
-                    ),
+    child: Expanded(
+      child: Row(
+        children: [
+          Expanded(
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: const Text(
+                  "Habilitar as configurações do seu sistema operacional.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
                   ),
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
 
@@ -207,7 +211,8 @@ class CameraPermissionWidget extends StatelessWidget {
         return AlertDialog(
           title: const Text('Precisamos acessar sua câmera'),
           content: const Text(
-              'Em seu aparelho, vá em Ajustes e habilite o uso da câmera.'),
+            'Em seu aparelho, vá em Ajustes e habilite o uso da câmera.',
+          ),
           actions: <Widget>[
             TextButton(
               child: const Text('Fechar'),
@@ -220,9 +225,9 @@ class CameraPermissionWidget extends StatelessWidget {
               child: const Text('Ajustes'),
               onPressed: () {
                 _canCloseWidget = false;
-                _channel
-                    .openSettings()
-                    .whenComplete(() => Navigator.of(context).pop());
+                _channel.openSettings().whenComplete(
+                      () => Navigator.of(context).pop(),
+                    );
               },
             ),
           ],

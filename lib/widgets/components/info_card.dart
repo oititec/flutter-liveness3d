@@ -4,12 +4,19 @@ class InfoCardWidget extends StatelessWidget {
   final String imagePath;
   final String title;
 
-  const InfoCardWidget(this.imagePath, this.title, {super.key});
+  const InfoCardWidget(
+    this.imagePath,
+    this.title, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(bottom: 5, top: 5),
+      padding: const EdgeInsets.only(
+        bottom: 5,
+        top: 5,
+      ),
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 255, 255, 255),
       ),
@@ -35,16 +42,16 @@ class InfoCardWidget extends StatelessWidget {
             ),
           ),
           Expanded(
-            /*1*/
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                /*2*/
                 Expanded(
                   child: Text(
                     title,
                     style: const TextStyle(
-                        fontWeight: FontWeight.w600, fontSize: 17),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 17,
+                    ),
                   ),
                 ),
               ],

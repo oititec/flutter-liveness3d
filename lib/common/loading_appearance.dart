@@ -7,21 +7,23 @@ class LoadingAppearence {
   String? backgroundColor;
   String? loadingColor;
 
-  LoadingAppearence(
-      {required this.type,
-      required this.size,
-      this.backgroundColor,
-      this.loadingColor}) {
+  LoadingAppearence({
+    required this.type,
+    required this.size,
+    this.backgroundColor,
+    this.loadingColor,
+  }) {
     backgroundColor = backgroundColor ?? '#FFFFFF';
     loadingColor = loadingColor ?? '#05D758';
   }
 
   factory LoadingAppearence.config(Map json) {
     return LoadingAppearence(
-        type: json['type'],
-        size: json['size'],
-        backgroundColor: json['backgroundColor'],
-        loadingColor: json['loadingColor']);
+      type: json['type'],
+      size: json['size'],
+      backgroundColor: json['backgroundColor'],
+      loadingColor: json['loadingColor'],
+    );
   }
 
   Map toJson() {

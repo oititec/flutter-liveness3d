@@ -10,17 +10,33 @@ import 'package:redux/redux.dart';
 
 class NoCameraPermissionException implements Exception {}
 
+class LivenessSuccessResult {
+  final bool valid;
+  final String cause;
+  final int codId;
+  final String protocol;
+  final String scanResultBlob;
+
+  LivenessSuccessResult(
+      this.valid, this.cause, this.codId, this.protocol, this.scanResultBlob);
+}
+
 class OitiLiveness3d {
-  Future openLiveness3D(
+  Future<LivenessSuccessResult> openLiveness3D(
       {required String appKey,
       required Environment environment,
       TextsBuilder? textsBuilder,
       LoadingAppearence? loading}) async {
-    return await OitiLiveness3dPlatform.instance.startLiveness(
-        appKey,
-        environment.caseName().toUpperCase(),
-        textsBuilder?.toJson(),
-        loading?.toJson());
+    final Map<String, Object?> result = await OitiLiveness3dPlatform.instance
+        .startLiveness(appKey, environment.caseName().toUpperCase(),
+            textsBuilder?.toJson(), loading?.toJson());
+
+    return LivenessSuccessResult(
+        result['valid'] as bool? ?? false,
+        result['cause'] as String? ?? '',
+        result['codId'] as int? ?? 0,
+        result['protocolo'] as String? ?? '',
+        result['scanResultBlob'] as String? ?? '');
   }
 
   Future eventLog(String? event) async {
@@ -43,7 +59,9 @@ class OitiLiveness3d {
       {required String appKey,
       required Environment environment,
       TextsBuilder? textsBuilder,
-      LoadingAppearence? loadingAppearance}) {
+      LoadingAppearence? loadingAppearance,
+      required Function(LivenessSuccessResult result) onSuccess,
+      required Function(Object? error) onError}) {
     final store = Store<int>(reducer, initialState: 99);
 
     return Liveness3DWidget(
@@ -51,6 +69,8 @@ class OitiLiveness3d {
         appKey: appKey,
         environment: environment,
         textsBuilder: textsBuilder,
-        loadingAppearance: loadingAppearance);
+        loadingAppearance: loadingAppearance,
+        onSuccess: onSuccess,
+        onError: onError);
   }
 }

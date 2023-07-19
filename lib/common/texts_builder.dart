@@ -58,7 +58,8 @@ class TextsBuilder {
         'RESULT_SUCCESS_MESSAGE': resultSuccessMessage ?? '',
         'FEEDBACK_CENTER_FACE': feedbackCenterFace ?? '',
         'FEEDBACK_FACE_NOT_FOUND': feedbackFaceNotFound ?? '',
-        'FEEDBACK_FACE_NOT_LOOKING_STRAIGHT_AHEAD': feedbackFaceNotLookingStraightAhead ?? '',
+        'FEEDBACK_FACE_NOT_LOOKING_STRAIGHT_AHEAD':
+            feedbackFaceNotLookingStraightAhead ?? '',
         'FEEDBACK_FACE_NOT_UPRIGHT': feedbackFaceNotUpright ?? '',
         'FEEDBACK_HOLD_STEADY': feedbackHoldSteady ?? '',
         'FEEDBACK_HOLD_STEADY_1': feedbackHoldSteady1 ?? '',
@@ -69,10 +70,12 @@ class TextsBuilder {
         'FEEDBACK_MOVE_PHONE_TO_EYE_LEVEL': feedbackMovePhoneToEyeLevel ?? '',
         'FEEDBACK_USE_EVEN_LIGHTING': feedbackUseEvenLighting ?? '',
         'FEEDBACK_FRAME_YOUR_FACE': feedbackFrameYourFace ?? '',
-        'FEEDBACK_POSITION_FACE_STRAIGHT_IN_OVAL': feedbackPositionFaceStraightInOval ?? '',
+        'FEEDBACK_POSITION_FACE_STRAIGHT_IN_OVAL':
+            feedbackPositionFaceStraightInOval ?? '',
         'FEEDBACK_REMOVE_DARK_GLASSES': feedbackRemoveDarkGlasses ?? '',
         'FEEDBACK_NEUTRAL_EXPRESSION': feedbackNeutralExpression ?? '',
         'FEEDBACK_CONDITIONS_TOO_BRIGHT': feedbackConditionsTooBright ?? '',
-        'FEEDBACK_BRIGHTEN_YOUR_ENVIRONMENT': feedbackBrightenYourEnvironment ?? ''
+        'FEEDBACK_BRIGHTEN_YOUR_ENVIRONMENT':
+            feedbackBrightenYourEnvironment ?? '',
       };
 }
