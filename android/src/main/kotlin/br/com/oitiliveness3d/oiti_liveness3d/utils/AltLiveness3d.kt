@@ -15,7 +15,8 @@ class AltLiveness3d(
     private val result: MethodChannel.Result?,
     private val appKey: String?,
     private val environment: String?,
-    private val textsBuilder: Map<String, String?>?
+    private val textsBuilder: Map<String, String?>?,
+    private val loadingAppearance: Map<String, Any?>?
 ) {
 
     private fun getUser(): Liveness3DUser {
@@ -40,27 +41,33 @@ class AltLiveness3d(
         }
 
         val texts = getTexts(textsBuilder)
+
+        val loadingColor = (loadingAppearance?.get("foreground") ?: "#05D758") as String
+        val loadingBackgroundColor = (loadingAppearance?.get("background") ?: "#FFFFFF") as String
+        val loadingSize = (loadingAppearance?.get("size") ?: 1) as Int
+        val loadingType = getLoadingType((loadingAppearance?.get("type") ?: "") as String)
+
         return Intent(context, HybridLiveness3DActivity::class.java).apply {
             putExtra(HybridLiveness3DActivity.PARAM_ENDPOINT, endpoint)
             putExtra(HybridLiveness3DActivity.PARAM_LIVENESS3D_USER, user)
             putExtra(HybridLiveness3DActivity.PARAM_DEBUG_ON, false)
             putExtra(HybridLiveness3DActivity.PARAM_TEXTS, texts)
-            putExtra(HybridLiveness3DActivity.PARAM_CUSTOM_LOADING_BACKGROUND, "#000000")
-            putExtra(HybridLiveness3DActivity.PARAM_CUSTOM_LOADING_SPINNER_COLOR, "#FFFFFF")
-            putExtra(HybridLiveness3DActivity.PARAM_CUSTOM_LOADING_SIZE, 100)
-            putExtra(HybridLiveness3DActivity.PARAM_CUSTOM_LOADING_TYPE, LoadingType3D.ACTIVITY_INDICATOR)
+            putExtra(HybridLiveness3DActivity.PARAM_CUSTOM_LOADING_SPINNER_COLOR, loadingColor)
+            putExtra(HybridLiveness3DActivity.PARAM_CUSTOM_LOADING_BACKGROUND, loadingBackgroundColor)
+            putExtra(HybridLiveness3DActivity.PARAM_CUSTOM_LOADING_SIZE, loadingSize * 100)
+            putExtra(HybridLiveness3DActivity.PARAM_CUSTOM_LOADING_TYPE, loadingType)
         }
     }
 
     fun onLiveness3DResultSuccess(data: Intent?) {
-        val response = HashMap<String, Any?>().apply {
-            put("result", data?.getBooleanExtra(HybridLiveness3DActivity.PARAM_RESULT, false))
-            put("cause", data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_CAUSE))
-            put("codId", data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_COD_ID))
-            put("protocol", data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_PROTOCOL))
-            put("scan", data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_SCAN))
-            put("valid", data?.getBooleanExtra(HybridLiveness3DActivity.PARAM_RESULT_VALID, false))
-        }
+        val response = mapOf<String, Any?>(
+            "valid" to data?.getBooleanExtra(HybridLiveness3DActivity.PARAM_RESULT_VALID, false),
+            "cause" to data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_CAUSE),
+            "codId" to data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_COD_ID),
+            "protocolo" to data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_PROTOCOL),
+            "scanResultBlob" to data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_SCAN),
+        )
+
         result?.success(response)
     }
 
@@ -130,5 +137,13 @@ class AltLiveness3d(
             hashMap.putAll(textsMap)
         }
         return hashMap
+    }
+
+    private fun getLoadingType(typeString: String): LoadingType3D {
+        return when(typeString) {
+            "spinner" -> LoadingType3D.SPINNER
+            "activity" -> LoadingType3D.ACTIVITY_INDICATOR
+            else -> LoadingType3D.ACTIVITY_INDICATOR
+        }
     }
 }

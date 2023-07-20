@@ -58,8 +58,9 @@ class Liveness3DWidget extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pop(context);
                         _channel.eventLog("ACTION_L3FT_instructionContinue");
+                        onError("User cancelled the journey");
+                        Navigator.pop(context);
                       },
                       child: titleSection,
                     ),
@@ -161,7 +162,11 @@ class Liveness3DWidget extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(25),
                               ),
                             ),
-                            onPressed: () => _continueAction(context),
+                            onPressed: () {
+                              _continueAction(context);
+                              _channel
+                                  .eventLog("ACTION_L3FT_instructionContinue");
+                            },
                             child: const Text("Continuar"),
                           ),
                         ],
@@ -186,7 +191,7 @@ class Liveness3DWidget extends StatelessWidget {
                     textsBuilder: textsBuilder,
                     loading: loadingAppearance,
                   )
-                  .then((result) => Navigator.pop(context, result))
+                  .then((result) => onSuccess(result))
                   .onError((error, stackTrace) => onError(error))
                   .whenComplete(() => Navigator.pop(context))
             }

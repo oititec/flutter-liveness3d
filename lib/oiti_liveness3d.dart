@@ -13,7 +13,7 @@ class NoCameraPermissionException implements Exception {}
 class LivenessSuccessResult {
   final bool valid;
   final String cause;
-  final int codId;
+  final String codId;
   final String protocol;
   final String scanResultBlob;
 
@@ -27,16 +27,21 @@ class OitiLiveness3d {
       required Environment environment,
       TextsBuilder? textsBuilder,
       LoadingAppearence? loading}) async {
-    final Map<String, Object?> result = await OitiLiveness3dPlatform.instance
-        .startLiveness(appKey, environment.caseName().toUpperCase(),
-            textsBuilder?.toJson(), loading?.toJson());
+    final result = await OitiLiveness3dPlatform.instance.startLiveness(
+        appKey,
+        environment.caseName().toUpperCase(),
+        textsBuilder?.toJson(),
+        loading?.toJson());
 
     return LivenessSuccessResult(
-        result['valid'] as bool? ?? false,
-        result['cause'] as String? ?? '',
-        result['codId'] as int? ?? 0,
-        result['protocolo'] as String? ?? '',
-        result['scanResultBlob'] as String? ?? '');
+      result['valid'] as bool? ?? false,
+      result['cause'] as String? ?? '',
+      result['codId'] as String? ?? '',
+      result['protocolo'] as String? ?? '',
+      result['scanResultBlob'] as String? ?? '',
+    );
+
+    // return LivenessSuccessResult(false, result.toString(), 0, '', '');
   }
 
   Future eventLog(String? event) async {

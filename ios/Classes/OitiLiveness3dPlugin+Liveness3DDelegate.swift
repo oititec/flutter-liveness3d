@@ -13,7 +13,7 @@ extension OitiLiveness3dPlugin: Liveness3DDelegate {
     public func handleLiveness3DValidation(validateModel: Liveness3DSuccess) {
         let response: Dictionary<String, Any> = [
             "cause": validateModel.cause ?? "",
-            "codId": validateModel.codID ?? 0,
+            "codId": String(validateModel.codID ?? 0.0),
             "protocolo": validateModel.protocolo ?? "",
             "scanResultBlob": validateModel.scanResultBlob ?? "",
             "valid": validateModel.valid ?? false

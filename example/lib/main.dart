@@ -220,7 +220,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   _onLiveness3DError(Object? error) {
-    resultTitle = 'Sucesso';
+    resultTitle = 'Error';
     resultContent = 'Cause: ${error.toString()}';
   }
 }
