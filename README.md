@@ -34,7 +34,7 @@ flutter pub add oiti_liveness3d
 Adicionar o Pod do FaceCaptcha no seu Podfile que está localizado dentro da pasta `ios`
 
 ```objectivec
-pod 'FaceCaptcha', '~> 4.10.0', :source => 'https://github.com/oititec/liveness-ios-specs.git'
+pod 'OILiveness3D', '~> 1.0.1', :source => 'https://github.com/oititec/ios-artifactory.git'
 ```
 
 Em seguida, caso não tenha habilitado as permissões de câmera você pode inserir as seguintes linhas no seu `info.plist`
@@ -46,104 +46,95 @@ Em seguida, caso não tenha habilitado as permissões de câmera você pode inse
 
 # 4. Uso no Dart (PASSO 2)
 
-Primeiro devemos importar o plugin 'package:oiti_liveness3d/oiti_liveness3d.dart'
+## 4.1. Importação
+Primeiro devemos importar o plugin e os _enums_.
 
 ```dart
 import 'package:oiti_liveness3d/oiti_liveness3d.dart';
+import 'package:oiti_liveness3d/common/enumerations.dart';
 ```
 
-## 4.1. Future
+### 4.2. Criação do Widget do Liveness 3D
+A classe `OitiLiveness3d` possui o método estático `createLiveness3DWidget(params)` que é responsável por criar e configurar o Widget do Liveness 3D.
 
-### 4.1.1. Future Existentes
+#### 4.2.1. Parâmetros
+| Parâmetro         | Tipo               | Descrição                                  |
+| :---------------- | :----------------- | :----------------------------------------- |
+| appKey            | String             | Chave gerada para execução dessa etapa.    |
+| environment       | Environment        | Ambiente de execução desejado.             |
+| textsBuilder      | TextsBuilder?      | Objeto contendo a customização dos textos. |
+| loadingAppearance | LoadingAppearence? | Objeto contendo a customização do loading. |
+| onSuccess         | Function(LivenessSuccessResult result) | Função de retorno de sucesso. |
+| onError           | Function(Object? error) | Função de retorno de erro. |
 
-| Função                   | Parâmetros                                                                     | Retorno                    |
-| ------------------------ | ------------------------------------------------------------------------------ | -------------------------- |
-| startliveness3d(params); | https://www.notion.so/Flutter-oiti_liveness2d-640e32e941634d0eb91a5924f22afc71 | RESULT_OK, RESULT_CANCELED |
+> **Nota** <br>
+> Os parâmetros `textsBuilder` e `loadingAppearance` são **opcionais** e estão relacionados a customização.
 
-### 4.1.2. Exemplo de uso (Funções)
+### 4.3. Tratamento dos retornos
 
-Após efetuar a importação da biblioteca, deve ser aplicada a app Key gerada dentro do parâmetro da função desejada, no exemplo abaixo chamamos a função quando clicamos no botão "Liveness 2D" ou "Documentoscopia"
+Os parâmetros `onSuccess` e `onError` são responsáveis por receber os retornos do Widget para o devido tratamento.
+
+#### 4.3.1. Sucesso
+
+O parâmetro `onSuccess` é uma função que recebe um objeto do tipo `LivenessSuccessResult` que possui as seguintes propriedades:
+
+| Propriedade    | Descrição                                                          |
+| :------------- | :----------------------------------------------------------------- |
+| valid          | Indica a autencidade das informações verificadas na prova de vida. |
+| cause          | Código identificador do tipo da transação.                         |
+| codId          | Indica por qual motivo o processo finalizou sem sucesso.           |
+| protocol       | Protocolo da transação de prova de vida.                           |
+| scanResultBlob | É um blob criptografado para uso do SDK no tratamento do retorno.  |
+
+| codId | Descrição                                  |
+| :---- | :----------------------------------------- |
+| 1.1   | Cadastro com sucesso.                      |
+| 1.2   | Certificação positiva. (Conhecido = True)  |
+| 200.1 | Cadastro com alertas.                      |
+| 200.2 | Certificação negativa. (Conhecido = True)  |
+| 200.3 | Certificação positiva. (Conhecido = False) |
+| 200.4 | Certificação negativa. (Conhecido = False) |
+| 200.5 | Validação na Base da Serpro                |
+| 300.1 | Prova de vida inválida.                    |
+| 300.2 | Usuário foi bloqueado.                     |
+
+#### 4.3.2. Erro
+
+O parâmetro `onError` é uma função que recebe um objeto indicando o erro ocorrido:
+
+### 4.4. Exemplo de uso
+
+Após efetuar a importação da biblioteca, deve ser aplicada a App Key gerada dentro do parâmetro da função desejada, no exemplo abaixo chamamos a função quando clicamos no botão "Liveness 3D".
 
 ```dart
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'intruction_view.dart';
-import 'permission_view.dart';
-
-import 'package:flutter/services.dart';
 import 'package:oiti_liveness3d/oiti_liveness3d.dart';
+import 'package:oiti_liveness3d/common/enumerations.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MaterialApp(home: ExampleWidget()));
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _oitiLiveness3dPlugin = OitiLiveness3d();
-
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
-
-  Future<void> initPlatformState() async {
-    String? platformVersion = "11";
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
-  }
+class ExampleWidget extends StatelessWidget {
+  const ExampleWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Liveness + Doc - Flutter'),
-        ),
-        body: Center(
-          child: Column(
-            children: [
-              Center(
-                child: Text(' '),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Liveness 3D'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          child: const Text('Open liveness'),
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => OitiLiveness3d.createLiveness3DWidget(
+                appKey: 'APP-KEY',
+                environment: Environment.hml,
+                onSuccess: (result) => print(result.toString()),
+                onError: (error) => print(error.toString()),
               ),
-              ElevatedButton(
-                  onPressed: () async {
-                    final appKey =
-                        "SUA_APP_KEY";
-                    print("\n$appKey\n");
-                    try {
-                      final x = await OitiLiveness3d.startliveness3d(
-                          "https://comercial.certiface.com.br:8443", appKey);
-                      print(x);
-                    } catch (e) {
-                      print(e.toString());
-                    }
-                  },
-                  child: Text("Liveness 2D")),
-              ElevatedButton(
-                  onPressed: () async {
-                    final appKey = "SUA_APP_KEY";
-                    try {
-                      final x = await OitiLiveness3d.startdocumentscopy(
-                          "https://comercial.certiface.com.br:8443", appKey);
-                      print(x);
-                    } catch (e) {
-                      print(e.toString());
-                    }
-                  },
-                  child: Text("Documentoscopia"))
-            ],
+            ),
           ),
         ),
       ),
@@ -153,93 +144,176 @@ class _MyAppState extends State<MyApp> {
 
 ```
 
-### 4.1.3. Exemplo de uso (View Customizada)
+### 4.5. Customização
 
-Para utilizar uma view customizada você pode aplicar o seguinte código em seu aplicativo Dart:
+Dentro plugin é possível customizar os textos que serão apresentados durante a prova de vida e a aparência do loading apresentado depois da tela de instruções.
 
-```jsx
+#### 4.5.1 Customização de textos
+Para customização dos textos é necessário fazer primeiro da classe responsável.
+
+```dart
+import 'package:oiti_liveness3d/common/loading_appearance.dart';
+```
+
+**Exemplo de customização dos textos:**
+
+```dart
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:oiti_liveness3d/oiti_liveness3d.dart';
+import 'package:oiti_liveness3d/common/enumerations.dart';
+import 'package:oiti_liveness3d/common/texts_builder.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MaterialApp(home: ExampleWidget()));
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _oitiLiveness3dPlugin = OitiLiveness3d();
-
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
-
-  Future<void> initPlatformState() async {
-    String? platformVersion = "11";
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
-  }
+class ExampleWidget extends StatelessWidget {
+  const ExampleWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Liveness + Doc - Flutter'),
-        ),
-        body: Center(
-          child: Column(
-            children: [
-              Center(
-                child: Text(' '),
-              ),
-              ElevatedButton(
-                  onPressed: () async {
-                    final appKey =
-                        "SUA_APP_KEY";
-                    print("\n$appKey\n");
-                    try {
-                      final x = await OitiLiveness3d.startliveness3d(
-                          "https://comercial.certiface.com.br:8443", appKey, IntroductionView());
-                      print(x);
-                    } catch (e) {
-                      print(e.toString());
-                    }
-                  },
-                  child: Text("Liveness 2D")),
-              ElevatedButton(
-                  onPressed: () async {
-                    final appKey = "SUA_APP_KEY";
-                    try {
-                      final x = await OitiLiveness3d.startdocumentscopy(
-                          "https://comercial.certiface.com.br:8443", appKey, PermissionView());
-                      print(x);
-                    } catch (e) {
-                      print(e.toString());
-                    }
-                  },
-                  child: Text("Documentoscopia"))
-            ],
-          ),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Liveness 3D'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+            child: const Text('Open liveness'),
+            onPressed: () {
+              final builder = TextsBuilder()
+                ..readyHeader1 = 'ready_header_1'
+                ..readyHeader2 = 'ready_header_2';
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => OitiLiveness3d.createLiveness3DWidget(
+                    appKey: 'APP-KEY',
+                    environment: Environment.hml,
+                    textsBuilder: builder,
+                    onSuccess: (result) => print(result.toString()),
+                    onError: (error) => print(error.toString()),
+                  ),
+                ),
+              );
+            }),
       ),
     );
   }
 }
+
+```
+
+**Tags de customização**
+
+_Ready Screen_
+
+| **Identificador** | **Exemplos para uso de texto**                |
+| :---------------- | :-------------------------------------------- |
+| READY_HEADER_1    | Prepare-se para seu                           |
+| READY_HEADER_2    | reconhecimento facial.                        |
+| READY_MESSAGE_1   | Posicione o seu rosto na moldura, aproxime-se |
+| READY_MESSAGE_2   | e toque em começar.                           |
+| READY_BUTTON      | Começar                                       |
+
+_Feedback_
+
+| **Identificador**                        | **Exemplos para uso de texto**   |
+| :--------------------------------------- | :------------------------------- |
+| FEEDBACK_CENTER_FACE                     | Centralize Seu Rosto             |
+| FEEDBACK_FACE_NOT_FOUND                  | Enquadre o Seu Rosto             |
+| FEEDBACK_FACE_NOT_LOOKING_STRAIGHT_AHEAD | Olhe Para Frente                 |
+| FEEDBACK_FACE_NOT_UPRIGHT                | Mantenha a Cabeça Reta           |
+| FEEDBACK_HOLD_STEADY                     | Segure Firme                     |
+| FEEDBACK_MOVE_PHONE_AWAY                 | Afaste-se                        |
+| FEEDBACK_MOVE_PHONE_CLOSER               | Aproxime-se                      |
+| FEEDBACK_MOVE_PHONE_TO_EYE_LEVEL         | Telefone ao Nível dos Olhos      |
+| FEEDBACK_USE_EVEN_LIGHTING               | Ilumine Seu Rosto Uniformemente  |
+| FEEDBACK_FRAME_YOUR_FACE                 | Encaixe Seu Rosto no Espaço Oval |
+| FEEDBACK_POSITION_FACE_STRAIGHT_IN_OVAL  | Olhe Para Frente                 |
+| FEEDBACK_HOLD_STEADY_1                   | Aguente Firme: 1                 |
+| FEEDBACK_HOLD_STEADY_2                   | Aguente Firme: 2                 |
+| FEEDBACK_HOLD_STEADY_3                   | Aguente Firme: 3                 |
+| FEEDBACK_REMOVE_DARK_GLASSES             | Tire Seus Óculos de Sol          |
+| FEEDBACK_NEUTRAL_EXPRESSION              | Fique Neutro, Não Sorria         |
+| FEEDBACK_EYES_STRAIGHT_AHEAD             | Olhe Para Frente                 |
+| FEEDBACK_CONDITIONS_TOO_BRIGHT           | Ambiente Muito Iluminado         |
+| FEEDBACK_BRIGHTEN_YOUR_ENVIRONMENT       | Ambiente Muito Escuro            |
+
+_Result Screen_
+
+| **Identificador**      | **Exemplos para uso de texto** |
+| :--------------------- | :----------------------------- |
+| RESULT_UPLOAD_MESSAGE  | Enviando...                    |
+| RESULT_SUCCESS_MESSAGE | Sucesso                        |
+
+_Retry Screen_
+
+| **Identificador**      | **Exemplos para uso de texto**       |
+| :--------------------- | :----------------------------------- |
+| RETRY_HEADER           | Vamos tentar novamente?              |
+| RETRY_SUBHEADER        | Siga o exemplo de foto ideal abaixo: |
+| RETRY_MESSAGE_SMILE    | Expressão Neutra, Sem Sorrir.        |
+| RETRY_MESSAGE_LIGHTING | Evite reflexos e iluminação extrema. |
+| RETRY_MESSAGE_CONTRAST | Limpe Sua Câmera.                    |
+| RETRY_YOUR_PICTURE     | Sua foto.                            |
+| RETRY_IDEAL_PICTURE    | Foto ideal.                          |
+| RETRY_BUTTON           | Tentar novamente.                    |
+
+#### 4.5.1 Customização do loading
+
+Para customização do loading é necessário fazer primeiro a importação dele.
+
+```dart
+import 'package:oiti_liveness3d/common/loading_appearance.dart';
+```
+
+**Exemplo de customização do loading:**
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:oiti_liveness3d/oiti_liveness3d.dart';
+import 'package:oiti_liveness3d/common/enumerations.dart';
+import 'package:oiti_liveness3d/common/loading_appearance.dart';
+
+void main() => runApp(const MaterialApp(home: ExampleWidget()));
+
+class ExampleWidget extends StatelessWidget {
+  const ExampleWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Liveness 3D'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+            child: const Text('Open liveness'),
+            onPressed: () {
+              final loadingAppearance = LoadingAppearence(
+                type: LoadingType.activity,
+                size: 10,
+                loadingColor: 'FFFFFF',
+                backgroundColor: '#000000',
+              );
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => OitiLiveness3d.createLiveness3DWidget(
+                    appKey: 'APP-KEY',
+                    environment: Environment.hml,
+                    loadingAppearance: loadingAppearance,
+                    onSuccess: (result) => print(result.toString()),
+                    onError: (error) => print(error.toString()),
+                  ),
+                ),
+              );
+            }),
+      ),
+    );
+  }
+}
+
 
 ```
 
