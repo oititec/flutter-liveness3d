@@ -7,6 +7,7 @@ import 'package:oiti_liveness3d/oiti_liveness3d.dart';
 import 'package:oiti_liveness3d/common/enumerations.dart';
 import 'package:oiti_liveness3d/common/loading_appearance.dart';
 import 'package:oiti_liveness3d/common/texts_builder.dart';
+import 'package:oiti_liveness3d/common/liveness_success_result.dart';
 
 class Liveness3DWidget extends StatelessWidget {
   final Store<int>? store;

@@ -4,47 +4,35 @@ import 'package:oiti_liveness3d/oiti_liveness3d_platform_interface.dart';
 import 'package:oiti_liveness3d/common/enumerations.dart';
 import 'package:oiti_liveness3d/common/texts_builder.dart';
 import 'package:oiti_liveness3d/common/loading_appearance.dart';
+import 'package:oiti_liveness3d/common/liveness_success_result.dart';
 import 'package:oiti_liveness3d/widgets/liveness3d.dart';
 import 'package:oiti_liveness3d/store/reducer.dart';
 import 'package:redux/redux.dart';
 
-class NoCameraPermissionException implements Exception {}
-
-class LivenessSuccessResult {
-  final bool valid;
-  final String cause;
-  final String codId;
-  final String protocol;
-  final String scanResultBlob;
-
-  LivenessSuccessResult(
-      this.valid, this.cause, this.codId, this.protocol, this.scanResultBlob);
-}
-
 class OitiLiveness3d {
-  Future<LivenessSuccessResult> openLiveness3D(
-      {required String appKey,
-      required Environment environment,
-      TextsBuilder? textsBuilder,
-      LoadingAppearence? loading}) async {
+  Future<LivenessSuccessResult> openLiveness3D({
+    required String appKey,
+    required Environment environment,
+    TextsBuilder? textsBuilder,
+    LoadingAppearence? loading,
+  }) async {
     final result = await OitiLiveness3dPlatform.instance.startLiveness(
-        appKey,
-        environment.caseName().toUpperCase(),
-        textsBuilder?.toJson(),
-        loading?.toJson());
+      appKey,
+      environment.caseName().toUpperCase(),
+      textsBuilder?.toJson(),
+      loading?.toJson(),
+    );
 
     return LivenessSuccessResult(
       result['valid'] as bool? ?? false,
       result['cause'] as String? ?? '',
       result['codId'] as String? ?? '',
-      result['protocolo'] as String? ?? '',
-      result['scanResultBlob'] as String? ?? '',
+      result['protocol'] as String? ?? '',
+      result['blob'] as String? ?? '',
     );
-
-    // return LivenessSuccessResult(false, result.toString(), 0, '', '');
   }
 
-  Future eventLog(String? event) async {
+  Future<void> eventLog(String? event) async {
     return await OitiLiveness3dPlatform.instance.eventLog(event);
   }
 
@@ -60,22 +48,24 @@ class OitiLiveness3d {
     return await OitiLiveness3dPlatform.instance.openSettings();
   }
 
-  Widget createLiveness3DWidget(
-      {required String appKey,
-      required Environment environment,
-      TextsBuilder? textsBuilder,
-      LoadingAppearence? loadingAppearance,
-      required Function(LivenessSuccessResult result) onSuccess,
-      required Function(Object? error) onError}) {
+  static Widget createLiveness3DWidget({
+    required String appKey,
+    required Environment environment,
+    TextsBuilder? textsBuilder,
+    LoadingAppearence? loadingAppearance,
+    required Function(LivenessSuccessResult result) onSuccess,
+    required Function(Object? error) onError,
+  }) {
     final store = Store<int>(reducer, initialState: 99);
 
     return Liveness3DWidget(
-        store: store,
-        appKey: appKey,
-        environment: environment,
-        textsBuilder: textsBuilder,
-        loadingAppearance: loadingAppearance,
-        onSuccess: onSuccess,
-        onError: onError);
+      store: store,
+      appKey: appKey,
+      environment: environment,
+      textsBuilder: textsBuilder,
+      loadingAppearance: loadingAppearance,
+      onSuccess: onSuccess,
+      onError: onError,
+    );
   }
 }

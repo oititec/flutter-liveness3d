@@ -14,8 +14,8 @@ extension OitiLiveness3dPlugin: Liveness3DDelegate {
         let response: Dictionary<String, Any> = [
             "cause": validateModel.cause ?? "",
             "codId": String(validateModel.codID ?? 0.0),
-            "protocolo": validateModel.protocolo ?? "",
-            "scanResultBlob": validateModel.scanResultBlob ?? "",
+            "protocol": validateModel.protocolo ?? "",
+            "blob": validateModel.scanResultBlob ?? "",
             "valid": validateModel.valid ?? false
         ]
         

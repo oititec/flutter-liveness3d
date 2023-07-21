@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:oiti_liveness3d/common/enumerations.dart';
 import 'package:oiti_liveness3d/common/texts_builder.dart';
 import 'package:oiti_liveness3d/common/loading_appearance.dart';
+import 'package:oiti_liveness3d/common/liveness_success_result.dart';
 import 'package:oiti_liveness3d/oiti_liveness3d.dart';
 
 void main() {
@@ -20,7 +21,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late TextEditingController _controller;
-  final _oitiLiveness3DPlugin = OitiLiveness3d();
   var appKey = '';
   final environment = Environment.hml;
   final acitivityLoading = LoadingAppearence(
@@ -112,7 +112,7 @@ class _MyAppState extends State<MyApp> {
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => _oitiLiveness3DPlugin.createLiveness3DWidget(
+            builder: (context) => OitiLiveness3d.createLiveness3DWidget(
               appKey: appKey,
               environment: environment,
               textsBuilder: builder,

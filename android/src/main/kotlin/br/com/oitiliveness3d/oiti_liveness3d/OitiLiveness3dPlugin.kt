@@ -16,7 +16,9 @@ import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
 
 class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginRegistry.ActivityResultListener {
-    private val L3_RESULT_REQUEST = 9564
+    companion object {
+        private const val L3_RESULT_REQUEST = 9564
+    }
 
     private lateinit var channel: MethodChannel
     private lateinit var context: Context
@@ -74,7 +76,8 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
 
             "OITI.eventLog" -> {
                 val event = call.argument<String>("event")
-                logEvent(event, "")
+                val appKey = call.argument<String>("appkey") ?: ""
+                logEvent(event, appKey)
             }
 
             else -> { result.notImplemented() }
@@ -95,6 +98,7 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
 
     private fun logEvent(name: String?, appKey: String) {
         FirebaseEvents(name.toString(), appKey).apply()
+        result.success(null)
     }
 
     private fun checkPermission() {

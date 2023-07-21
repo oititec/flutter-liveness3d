@@ -7,8 +7,12 @@ class MethodChannelOitiLiveness3d extends OitiLiveness3dPlatform {
   final methodChannel = const MethodChannel('oiti_liveness3d');
 
   @override
-  Future startLiveness(String appKey, String environment,
-      Object? builder, Object? loading) async {
+  Future startLiveness(
+    String appKey,
+    String environment,
+    Object? builder,
+    Object? loading,
+  ) async {
     return await methodChannel.invokeMapMethod(
       'OITI.startLiveness3d',
       {
@@ -21,10 +25,10 @@ class MethodChannelOitiLiveness3d extends OitiLiveness3dPlatform {
   }
 
   @override
-  Future eventLog(
+  Future<void> eventLog(
     String? event,
   ) async {
-    return await methodChannel.invokeMapMethod(
+    return await methodChannel.invokeMethod(
       'OITI.eventLog',
       {
         'event': event,

@@ -25,7 +25,7 @@ abstract class OitiLiveness3dPlatform extends PlatformInterface {
     throw UnimplementedError('Liveness3D() has not been implemented.');
   }
 
-  Future eventLog(String? event) {
+  Future<void> eventLog(String? event) {
     throw UnimplementedError('eventLog() has not been implemented.');
   }
 

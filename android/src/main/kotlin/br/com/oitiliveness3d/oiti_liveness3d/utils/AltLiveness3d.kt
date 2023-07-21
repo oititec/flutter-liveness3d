@@ -64,8 +64,8 @@ class AltLiveness3d(
             "valid" to data?.getBooleanExtra(HybridLiveness3DActivity.PARAM_RESULT_VALID, false),
             "cause" to data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_CAUSE),
             "codId" to data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_COD_ID),
-            "protocolo" to data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_PROTOCOL),
-            "scanResultBlob" to data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_SCAN),
+            "protocol" to data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_PROTOCOL),
+            "blob" to data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_SCAN),
         )
 
         result?.success(response)

@@ -1,5 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:oiti_liveness3d/common/enum_case_name.dart';
+import 'package:oiti_liveness3d/common/enumerations.dart';
+import 'package:oiti_liveness3d/common/loading_appearance.dart';
+import 'package:oiti_liveness3d/common/texts_builder.dart';
 import 'package:oiti_liveness3d/oiti_liveness3d_method_channel.dart';
 
 void main() {
@@ -10,15 +14,62 @@ void main() {
 
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return '42';
+      switch (methodCall.method) {
+        case 'OITI.startLiveness3d':
+          return <String, Object?>{
+            'valid': false,
+            'cause': 'PROVA DE VIDA',
+            'codId': '300.2',
+            'protocol': '123455123',
+            'blob': null,
+          };
+        case 'OITI.eventLog':
+          return true;
+        case 'OITI.checkPermission':
+          return true;
+        case 'OITI.askPermission':
+          return true;
+        default:
+          return null;
+      }
     });
   });
 
   tearDown(() {
     channel.setMockMethodCallHandler(null);
   });
-/* 
-  test('getPlatformVersion', () async {
-    expect(await platform.getPlatformVersion(), '42');
-  }); */
+
+  test('startLiveness', () async {
+    const appKey = 'app-key';
+    final environment = Environment.hml.caseName().toUpperCase();
+    final builder = TextsBuilder()..readyHeader1 = 'ready_header_1';
+    final loading = LoadingAppearence(
+      type: LoadingType.activity,
+      size: 10,
+    ).toJson();
+
+    expect(
+      await platform.startLiveness(
+        appKey,
+        environment,
+        builder.toJson(),
+        loading,
+      ),
+      <String, Object?>{
+        'valid': false,
+        'cause': 'PROVA DE VIDA',
+        'codId': '300.2',
+        'protocol': '123455123',
+        'blob': null,
+      },
+    );
+  });
+
+  test('checkPermission', () async {
+    expect(await platform.checkPermission(), true);
+  });
+
+  test('askPermission', () async {
+    expect(await platform.askPermission(), true);
+  });
 }

@@ -30,10 +30,9 @@ public class OitiLiveness3dPlugin: NSObject, FlutterPlugin {
             case "OITI.askPermission":
                 AVChecker.requestCameraAccess(result: { result($0) })
             case "OITI.eventLog":
-                try eventLog(arguments: callArguments)
+                try eventLog(arguments: callArguments, result: result)
             case "OITI.openSettingsApp":
-                openSettingsApp()
-                result(true)
+                openSettingsApp(result: result)
             default:
                 result(FlutterMethodNotImplemented)
             }
@@ -99,18 +98,20 @@ public class OitiLiveness3dPlugin: NSObject, FlutterPlugin {
         present(viewController, animated: true)
     }
     
-    private func eventLog(arguments rawArguments: Any?) throws {
+    private func eventLog(arguments rawArguments: Any?, result: @escaping FlutterResult) throws {
         guard let arguments = rawArguments as? Dictionary<String, Any> else {
             throw PluginError.invalidArguments
         }
         
         let event = (arguments["event"] as? String) ?? ""
         print(event)
+        result(nil)
     }
     
-    func openSettingsApp() {
+    func openSettingsApp(result: @escaping FlutterResult) {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url)
         }
+        result(nil)
     }
 }
