@@ -1,5 +1,5 @@
 ## versão 2.0.0
-_data: 21/07/2023_
+_data: 24/07/2023_
 
 - **Melhorias**
     - Criado um novo método para acessar o _widget_ do Liveness 3D;
