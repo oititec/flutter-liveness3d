@@ -1,8 +1,5 @@
-import 'dart:ffi';
-
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-
-import 'oiti_liveness3d_method_channel.dart';
+import 'package:oiti_liveness3d/oiti_liveness3d_method_channel.dart';
 
 abstract class OitiLiveness3dPlatform extends PlatformInterface {
   /// Constructs a OitiLiveness3dPlatform.
@@ -20,11 +17,15 @@ abstract class OitiLiveness3dPlatform extends PlatformInterface {
   }
 
   Future startLiveness(
-      String? baseUrl, String? appKey, Object? loading, bool isProd) {
+    String appKey,
+    String environment,
+    Object? builder, 
+    Object? loading
+  ) {
     throw UnimplementedError('Liveness3D() has not been implemented.');
   }
 
-  Future eventLog(String? event) {
+  Future<void> eventLog(String? event) {
     throw UnimplementedError('eventLog() has not been implemented.');
   }
 
@@ -34,5 +35,9 @@ abstract class OitiLiveness3dPlatform extends PlatformInterface {
 
   Future askPermission() {
     throw UnimplementedError('askPermission() has not been implemented.');
+  }
+
+  Future<void> openSettings() {
+    throw UnimplementedError('openSettings() has not been implemented.');
   }
 }

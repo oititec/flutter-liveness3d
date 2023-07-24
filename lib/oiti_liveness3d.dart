@@ -1,97 +1,71 @@
-import 'oiti_liveness3d_platform_interface.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import './store/reducer.dart';
+import 'package:oiti_liveness3d/common/enum_case_name.dart';
+import 'package:oiti_liveness3d/oiti_liveness3d_platform_interface.dart';
+import 'package:oiti_liveness3d/common/enumerations.dart';
+import 'package:oiti_liveness3d/common/texts_builder.dart';
+import 'package:oiti_liveness3d/common/loading_appearance.dart';
+import 'package:oiti_liveness3d/common/liveness_success_result.dart';
+import 'package:oiti_liveness3d/widgets/liveness3d.dart';
+import 'package:oiti_liveness3d/store/reducer.dart';
 import 'package:redux/redux.dart';
-import 'dart:convert';
-
-import './screen/instruction_screen.dart';
-import './screen/permission_screen.dart';
-import './common/loading.dart';
 
 class OitiLiveness3d {
-  static Future startLiveness(String? baseUrl, String? appKey, Object? loading,
-      {bool isProd = false}) async {
-    return await OitiLiveness3dPlatform.instance
-        .startLiveness(baseUrl, appKey, loading, isProd);
-  }
+  Future<LivenessSuccessResult> openLiveness3D({
+    required String appKey,
+    required Environment environment,
+    TextsBuilder? textsBuilder,
+    LoadingAppearence? loading,
+  }) async {
+    final result = await OitiLiveness3dPlatform.instance.startLiveness(
+      appKey,
+      environment.caseName().toUpperCase(),
+      textsBuilder?.toJson(),
+      loading?.toJson(),
+    );
 
-  //Bridge
-
-  static Future eventLog(String? event) async {
-    return await OitiLiveness3dPlatform.instance.eventLog(event);
-  }
-
-  static Future checkPermission() async {
-    return await OitiLiveness3dPlatform.instance.checkPermission();
-  }
-
-  static Future askPermission() async {
-    return await OitiLiveness3dPlatform.instance.askPermission();
-  }
-
-  static Future checkScreen(
-      BuildContext context, String? appKey, Object? loading) async {
-    final Store<int> store = Store<int>(reducer, initialState: 99);
-    final checkPermission = await OitiLiveness3d.checkPermission();
-
-    if (checkPermission == true) {
-      try {
-        final livenessResult = await OitiLiveness3d.startLiveness(
-            "https://comercial.certiface.com.br:8443", appKey, loading,
-            isProd: false);
-      } catch (e) {
-        print(e.toString());
-      }
-    } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => PermissionScreen(
-                store: store, appKey: appKey, loading: loading)),
-      );
-    }
-  }
-
-  //Futures
-
-  static Future verifyPermission(
-      BuildContext context, String? appKey, Object? loading) async {
-    final Store<int> store = Store<int>(reducer, initialState: 99);
-    final askPermission = await OitiLiveness3d.askPermission();
-
-    if (askPermission == true) {
-      await OitiLiveness3d.checkScreen(context, appKey, loading);
-    } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => InstructionScreen(
-                store: store, appKey: appKey, loading: loading)),
-      );
-    }
-  }
-
-  static Future startLiveness3d(
-      BuildContext context,
-      String? appKey,
-      Object? loading,
-      Widget? instructionScreen,
-      Widget? permissionScreen) async {
-    final Store<int> store = Store<int>(reducer, initialState: 99);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => InstructionScreen(
-              store: store, appKey: appKey, loading: loading)),
+    return LivenessSuccessResult(
+      result['valid'] as bool? ?? false,
+      result['cause'] as String? ?? '',
+      result['codId'] as String? ?? '',
+      result['protocol'] as String? ?? '',
+      result['blob'] as String? ?? '',
     );
   }
 
-  static Future<LoadingApparence> configLoading(Object? json) async {
-    var jsonD = jsonDecode(json.toString());
-    print(jsonD);
-    var loading = LoadingApparence.config(jsonD);
-    print(loading.type);
-    return LoadingApparence(type: loading.type, size: loading.size);
+  Future<void> eventLog(String? event) async {
+    return await OitiLiveness3dPlatform.instance.eventLog(event);
+  }
+
+  Future checkPermission() async {
+    return await OitiLiveness3dPlatform.instance.checkPermission();
+  }
+
+  Future askPermission() async {
+    return await OitiLiveness3dPlatform.instance.askPermission();
+  }
+
+  Future<void> openSettings() async {
+    return await OitiLiveness3dPlatform.instance.openSettings();
+  }
+
+  static Widget createLiveness3DWidget({
+    required String appKey,
+    required Environment environment,
+    TextsBuilder? textsBuilder,
+    LoadingAppearence? loadingAppearance,
+    required Function(LivenessSuccessResult result) onSuccess,
+    required Function(Object? error) onError,
+  }) {
+    final store = Store<int>(reducer, initialState: 99);
+
+    return Liveness3DWidget(
+      store: store,
+      appKey: appKey,
+      environment: environment,
+      textsBuilder: textsBuilder,
+      loadingAppearance: loadingAppearance,
+      onSuccess: onSuccess,
+      onError: onError,
+    );
   }
 }
