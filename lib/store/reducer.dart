@@ -1,4 +1,4 @@
-import './actions.dart';
+import 'package:oiti_liveness3d/store/actions.dart';
 
 int reducer(int previousState, dynamic action) {
   if (action == ActionsStore.increment) {

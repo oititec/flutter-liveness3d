@@ -1,9 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-
-import 'oiti_liveness3d_platform_interface.dart';
+import 'package:oiti_liveness3d/oiti_liveness3d_platform_interface.dart';
 
 class MethodChannelOitiLiveness3d extends OitiLiveness3dPlatform {
   @visibleForTesting
@@ -11,49 +8,52 @@ class MethodChannelOitiLiveness3d extends OitiLiveness3dPlatform {
 
   @override
   Future startLiveness(
-      String? baseUrl, String? appKey, Object? loading, bool isProd) async {
-    final result = await methodChannel.invokeMapMethod(
+    String appKey,
+    String environment,
+    Object? builder,
+    Object? loading,
+  ) async {
+    return await methodChannel.invokeMapMethod(
       'OITI.startLiveness3d',
       {
-        'appKey': appKey,
-        'baseUrl': baseUrl,
+        'appkey': appKey,
+        'environment': environment,
+        'texts': builder,
         'loading': loading,
-        'isProd': isProd,
       },
     );
-
-    return result;
   }
 
   @override
-  Future eventLog(
+  Future<void> eventLog(
     String? event,
   ) async {
-    final result = await methodChannel.invokeMapMethod(
+    return await methodChannel.invokeMethod(
       'OITI.eventLog',
       {
         'event': event,
       },
     );
-
-    return result;
   }
 
   @override
   Future checkPermission() async {
-    final result = await methodChannel.invokeMethod(
+    return await methodChannel.invokeMethod(
       'OITI.checkPermission',
     );
-
-    return result;
   }
 
   @override
   Future askPermission() async {
-    final result = await methodChannel.invokeMethod(
+    return await methodChannel.invokeMethod(
       'OITI.askPermission',
     );
+  }
 
-    return result;
+  @override
+  Future<void> openSettings() async {
+    return await methodChannel.invokeMethod(
+      'OITI.openSettingsApp',
+    );
   }
 }
