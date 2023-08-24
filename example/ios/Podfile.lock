@@ -20,7 +20,7 @@ DEPENDENCIES:
   - oiti_liveness3d (from `.symlinks/plugins/oiti_liveness3d/ios`)
 
 SPEC REPOS:
-  https://github.com/oititec/ios-artifactory-beta:
+  https://github.com/oititec/ios-artifactory:
     - OICommons
     - OIComponents
     - OILiveness3D
@@ -42,6 +42,6 @@ SPEC CHECKSUMS:
   OINetwork: 3cf1ea4bd61a98bd68db7d1caa3f175b4868f5b4
   oiti_liveness3d: 87320ff5c944006e685a0dd15b6d711dcfdca76a
 
-PODFILE CHECKSUM: f9240d63bf8a051c424c49902fac8c5d0c4f0af8
+PODFILE CHECKSUM: 7087fd2174588fcd196392818c34ba0b6eafa3fd
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.12.1
