@@ -62,8 +62,9 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
                 val appKey = call.argument<String>("appkey")
                 val environment = call.argument<String>("environment")
                 val textsBuilder = call.argument<Map<String, String?>>("texts")
+                val themeBuilder = call.argument<Map<String, String?>>("theme")
                 val loading = call.argument<Map<String, Any?>>("loading")
-                startLiveness3d(appKey, environment, textsBuilder, loading)
+                startLiveness3d(appKey, environment, textsBuilder, themeBuilder, loading)
             }
 
             "OITI.checkPermission" -> {
@@ -84,7 +85,7 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
         }
     }
 
-    private fun startLiveness3d(appKey: String?, environment: String?, textsBuilder: Map<String, String?>?, loadingAppearance: Map<String, Any?>?) {
+    private fun startLiveness3d(appKey: String?, environment: String?, textsBuilder: Map<String, String?>?, themeBuilder: Map<String, String?>?, loadingAppearance: Map<String, Any?>?) {
         try {
             manager = AltLiveness3d(context, result, appKey, environment, textsBuilder, loadingAppearance)
             val intent = manager?.getIntent()

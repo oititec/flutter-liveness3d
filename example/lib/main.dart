@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oiti_liveness3d/common/enumerations.dart';
 import 'package:oiti_liveness3d/common/texts_builder.dart';
+import 'package:oiti_liveness3d/common/theme_builder.dart';
 import 'package:oiti_liveness3d/common/loading_appearance.dart';
 import 'package:oiti_liveness3d/common/liveness_success_result.dart';
 import 'package:oiti_liveness3d/oiti_liveness3d.dart';
@@ -190,6 +191,10 @@ class _MyAppState extends State<MyApp> {
       ..feedbackNeutralExpression = 'feedback_neutral_expression'
       ..feedbackConditionsTooBright = 'feedback_conditions_too_bright'
       ..feedbackBrightenYourEnvironment = 'feedback_brighten_your_environment';
+  }
+
+  ThemeBuilder _themeCustomization() {
+    return ThemeBuilder()..guidanceCustomizationBackgroundColors = '#FFFFFF';
   }
 
   Future<void> _showAlertDialog(

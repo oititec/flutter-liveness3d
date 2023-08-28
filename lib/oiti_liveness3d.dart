@@ -3,6 +3,7 @@ import 'package:oiti_liveness3d/common/enum_case_name.dart';
 import 'package:oiti_liveness3d/oiti_liveness3d_platform_interface.dart';
 import 'package:oiti_liveness3d/common/enumerations.dart';
 import 'package:oiti_liveness3d/common/texts_builder.dart';
+import 'package:oiti_liveness3d/common/theme_builder.dart';
 import 'package:oiti_liveness3d/common/loading_appearance.dart';
 import 'package:oiti_liveness3d/common/liveness_success_result.dart';
 import 'package:oiti_liveness3d/widgets/liveness3d.dart';
@@ -14,12 +15,14 @@ class OitiLiveness3d {
     required String appKey,
     required Environment environment,
     TextsBuilder? textsBuilder,
+    ThemeBuilder? themeBuilder,
     LoadingAppearence? loading,
   }) async {
     final result = await OitiLiveness3dPlatform.instance.startLiveness(
       appKey,
       environment.caseName().toUpperCase(),
       textsBuilder?.toJson(),
+      themeBuilder?.toJson(),
       loading?.toJson(),
     );
 
@@ -52,6 +55,7 @@ class OitiLiveness3d {
     required String appKey,
     required Environment environment,
     TextsBuilder? textsBuilder,
+    ThemeBuilder? themeBuilder,
     LoadingAppearence? loadingAppearance,
     required Function(LivenessSuccessResult result) onSuccess,
     required Function(Object? error) onError,
@@ -63,6 +67,7 @@ class OitiLiveness3d {
       appKey: appKey,
       environment: environment,
       textsBuilder: textsBuilder,
+      themeBuilder: themeBuilder,
       loadingAppearance: loadingAppearance,
       onSuccess: onSuccess,
       onError: onError,
