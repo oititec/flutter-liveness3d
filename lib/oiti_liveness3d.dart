@@ -4,6 +4,7 @@ import 'package:oiti_liveness3d/oiti_liveness3d_platform_interface.dart';
 import 'package:oiti_liveness3d/common/enumerations.dart';
 import 'package:oiti_liveness3d/common/texts_builder.dart';
 import 'package:oiti_liveness3d/common/theme_builder.dart';
+import 'package:oiti_liveness3d/common/fonts_builder.dart';
 import 'package:oiti_liveness3d/common/loading_appearance.dart';
 import 'package:oiti_liveness3d/common/liveness_success_result.dart';
 import 'package:oiti_liveness3d/widgets/liveness3d.dart';
@@ -16,6 +17,7 @@ class OitiLiveness3d {
     required Environment environment,
     TextsBuilder? textsBuilder,
     ThemeBuilder? themeBuilder,
+    Liveness3dFonts? fontsBuilder,
     LoadingAppearence? loading,
   }) async {
     final result = await OitiLiveness3dPlatform.instance.startLiveness(
@@ -23,6 +25,7 @@ class OitiLiveness3d {
       environment.caseName().toUpperCase(),
       textsBuilder?.toJson(),
       themeBuilder?.toJson(),
+      fontsBuilder?.toJson(),
       loading?.toJson(),
     );
 
@@ -56,6 +59,7 @@ class OitiLiveness3d {
     required Environment environment,
     TextsBuilder? textsBuilder,
     ThemeBuilder? themeBuilder,
+    Liveness3dFonts? fontsBuilder,
     LoadingAppearence? loadingAppearance,
     required Function(LivenessSuccessResult result) onSuccess,
     required Function(Object? error) onError,
@@ -68,6 +72,7 @@ class OitiLiveness3d {
       environment: environment,
       textsBuilder: textsBuilder,
       themeBuilder: themeBuilder,
+      fontsBuilder: fontsBuilder,
       loadingAppearance: loadingAppearance,
       onSuccess: onSuccess,
       onError: onError,

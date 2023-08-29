@@ -80,6 +80,12 @@ class _MyAppState extends State<MyApp> {
                 'Custom Texts',
                 builder: _textsCustomization(),
               ),
+              _liveness3DWidgetOption(
+                context,
+                'Custom Theme',
+                builder: _textsCustomization(),
+                themeBuilder: _themeCustomization(),
+              ),
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: Text(resultContent),
@@ -102,6 +108,7 @@ class _MyAppState extends State<MyApp> {
     BuildContext context,
     String title, {
     TextsBuilder? builder,
+    ThemeBuilder? themeBuilder,
     LoadingAppearence? loading,
   }) {
     return Padding(
@@ -117,6 +124,7 @@ class _MyAppState extends State<MyApp> {
               appKey: appKey,
               environment: environment,
               textsBuilder: builder,
+              themeBuilder: themeBuilder,
               loadingAppearance: loading,
               onSuccess: (result) => _onLiveness3DSuccess(result),
               onError: (error) => _onLiveness3DError(error),
@@ -194,7 +202,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   ThemeBuilder _themeCustomization() {
-    return ThemeBuilder()..guidanceCustomizationBackgroundColors = '#FFFFFF';
+    return ThemeBuilder()
+      ..guidanceCustomizationButtonBackgroundNormalColor = '#000000';
   }
 
   Future<void> _showAlertDialog(

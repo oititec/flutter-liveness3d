@@ -17,7 +17,7 @@ abstract class OitiLiveness3dPlatform extends PlatformInterface {
   }
 
   Future startLiveness(String appKey, String environment, Object? builder,
-      Object? themeBuilder, Object? loading) {
+      Object? themeBuilder, Object? fontsBuilder, Object? loading) {
     throw UnimplementedError('Liveness3D() has not been implemented.');
   }
 

@@ -4,10 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import br.com.oiti.liveness3d.app.ui.HybridLiveness3DActivity
-import br.com.oiti.liveness3d.data.model.ENVIRONMENT3D
-import br.com.oiti.liveness3d.data.model.Liveness3DTextKey
-import br.com.oiti.liveness3d.data.model.Liveness3DUser
-import br.com.oiti.liveness3d.data.model.LoadingType3D
+import br.com.oiti.liveness3d.data.model.*
+import br.com.oitiliveness3d.oiti_liveness3d.theme.Liveness3DTheme
 import io.flutter.plugin.common.MethodChannel
 
 class AltLiveness3d(
@@ -16,15 +14,18 @@ class AltLiveness3d(
     private val appKey: String?,
     private val environment: String?,
     private val textsBuilder: Map<String, String?>?,
+    private val themeBuilder: Map<String, String?>?,
+    private val fontsBuilder: Map<String, String?>?,
     private val loadingAppearance: Map<String, Any?>?
 ) {
 
     private fun getUser(): Liveness3DUser {
         val env: ENVIRONMENT3D = if (environment.equals("PRD")) ENVIRONMENT3D.PRD else ENVIRONMENT3D.HML
-
+        val theme = Liveness3DTheme(themeBuilder).apply()
         return Liveness3DUser(
             appKey = appKey!!,
-            environment = env
+            environment = env,
+            liveness3DTheme = theme
         )
     }
 
@@ -41,6 +42,7 @@ class AltLiveness3d(
         }
 
         val texts = getTexts(textsBuilder)
+        val fonts = getFonts(fontsBuilder)
 
         val loadingColor = (loadingAppearance?.get("foreground") ?: "#05D758") as String
         val loadingBackgroundColor = (loadingAppearance?.get("background") ?: "#FFFFFF") as String
@@ -52,6 +54,7 @@ class AltLiveness3d(
             putExtra(HybridLiveness3DActivity.PARAM_LIVENESS3D_USER, user)
             putExtra(HybridLiveness3DActivity.PARAM_DEBUG_ON, false)
             putExtra(HybridLiveness3DActivity.PARAM_TEXTS, texts)
+            putExtra(HybridLiveness3DActivity.PARAM_FONTS, fonts)
             putExtra(HybridLiveness3DActivity.PARAM_CUSTOM_LOADING_SPINNER_COLOR, loadingColor)
             putExtra(HybridLiveness3DActivity.PARAM_CUSTOM_LOADING_BACKGROUND, loadingBackgroundColor)
             putExtra(HybridLiveness3DActivity.PARAM_CUSTOM_LOADING_SIZE, loadingSize * 100)
@@ -67,7 +70,6 @@ class AltLiveness3d(
             "protocol" to data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_PROTOCOL),
             "blob" to data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_SCAN),
         )
-
         result?.success(response)
     }
 
@@ -75,6 +77,45 @@ class AltLiveness3d(
         val errorMessage: String = data?.getStringExtra(HybridLiveness3DActivity.PARAM_RESULT_ERROR) ?: ""
         Log.d("TAG", errorMessage)
         result?.error(errorMessage, errorMessage, null)
+    }
+
+    private fun getFontKey(identifier: String): Liveness3DFontsKey? {
+        return when(identifier) {
+            /* Guidance */
+            "guidanceCustomizationHeaderFont" -> Liveness3DFontsKey.GUIDANCE_CUSTOMIZATION_HEADER_FONT
+            "guidanceCustomizationSubtextFont" -> Liveness3DFontsKey.GUIDANCE_CUSTOMIZATION_SUBTEXT_FONT
+            /* Button */
+            "guidanceCustomizationButtonFont" -> Liveness3DFontsKey.GUIDANCE_CUSTOMIZATION_BUTTON_FONT
+
+            /* Ready Screen */
+            "readyScreenCustomizationHeaderFont" -> Liveness3DFontsKey.GUIDANCE_CUSTOMIZATION_READY_SCREEN_HEADER_FONT
+            "readyScreenCustomizationSubtextFont" -> Liveness3DFontsKey.GUIDANCE_CUSTOMIZATION_READY_SCREEN_SUBTEXT_FONT
+            /* Retry Screen */
+            "retryScreenCustomizationHeaderFont" -> Liveness3DFontsKey.GUIDANCE_CUSTOMIZATION_RETRY_SCREEN_HEADER_FONT
+            "retryScreenCustomizationSubtextFont" -> Liveness3DFontsKey.GUIDANCE_CUSTOMIZATION_RETRY_SCREEN_SUBTEXT_FONT
+            /* Result Screen */
+            "resultScreenCustomizationMessageFont" -> Liveness3DFontsKey.RESULT_SCREEN_CUSTOMIZATION_MESSAGE_FONT
+            /* Feedback */
+            "feedbackCustomizationTextFont" -> Liveness3DFontsKey.FEEDBACK_CUSTOMIZATION_TEXT_FONT
+            else -> null
+        }
+    }
+
+    private fun getFonts(fontsBuilder: Map<String, String?>?): HashMap<Liveness3DFontsKey, String> {
+        val hashMap = HashMap<Liveness3DFontsKey, String>()
+        if (fontsBuilder != null) {
+            val fontsMap = fontsBuilder
+                .mapNotNull {
+                    val key = getFontKey(it.key)
+                    val value = it.value
+                    if (key != null && value != null) {
+                        Pair(key, value)
+                    } else { null }
+                }
+                .toMap()
+            hashMap.putAll(fontsMap)
+        }
+        return hashMap
     }
 
     private fun getTextKey(identifier: String): Liveness3DTextKey? {

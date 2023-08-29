@@ -12,6 +12,7 @@ class MethodChannelOitiLiveness3d extends OitiLiveness3dPlatform {
     String environment,
     Object? builder,
     Object? themeBuilder,
+    Object? fontsBuilder,
     Object? loading,
   ) async {
     return await methodChannel.invokeMapMethod(
@@ -21,6 +22,7 @@ class MethodChannelOitiLiveness3d extends OitiLiveness3dPlatform {
         'environment': environment,
         'texts': builder,
         'theme': themeBuilder,
+        'fonts': fontsBuilder,
         'loading': loading,
       },
     );

@@ -2,10 +2,8 @@ class ThemeBuilder {
   /* Guidance */
   String? guidanceCustomizationBackgroundColors;
   String? guidanceCustomizationForegroundColor;
-  String? guidanceCustomizationHeaderFont;
-  String? guidanceCustomizationSubtextFont;
 
-  String? guidanceCustomizationButtonFont;
+  /* Button */
   String? guidanceCustomizationButtonTextNormalColor;
   String? guidanceCustomizationButtonBackgroundNormalColor;
   String? guidanceCustomizationButtonTextHighlightColor;
@@ -17,15 +15,11 @@ class ThemeBuilder {
   String? guidanceCustomizationButtonCornerRadius;
 
   /* Ready Screen */
-  String? guidanceCustomizationReadyScreenHeaderFont;
   String? guidanceCustomizationReadyScreenHeaderTextColor;
-  String? guidanceCustomizationReadyScreenSubtextFont;
   String? guidanceCustomizationReadyScreenSubtextTextColor;
 
   /* Retry Screen */
-  String? guidanceCustomizationRetryScreenHeaderFont;
   String? guidanceCustomizationRetryScreenHeaderTextColor;
-  String? guidanceCustomizationRetryScreenSubtextFont;
   String? guidanceCustomizationRetryScreenSubtextTextColor;
   String? guidanceCustomizationRetryScreenImageBorderColor;
   String? guidanceCustomizationRetryScreenImageBorderWidth;
@@ -41,7 +35,6 @@ class ThemeBuilder {
   String? resultScreenCustomizationUploadProgressTrackColor;
   String? resultScreenCustomizationResultAnimationBackgroundColor;
   String? resultScreenCustomizationResultAnimationForegroundColor;
-  String? resultScreenCustomizationMessageFont;
 
   /* Oval */
   String? ovalCustomizationStrokeWidth;
@@ -65,19 +58,12 @@ class ThemeBuilder {
   String? feedbackCustomizationCornerRadius;
   String? feedbackCustomizationBackgroundColors;
   String? feedbackCustomizationTextColor;
-  String? feedbackCustomizationTextFont;
 
   Map toJson() => {
         'guidanceCustomizationBackgroundColors':
             guidanceCustomizationBackgroundColors ?? '',
         'guidanceCustomizationForegroundColor':
             guidanceCustomizationForegroundColor ?? '',
-        'guidanceCustomizationHeaderFont':
-            guidanceCustomizationHeaderFont ?? '',
-        'guidanceCustomizationSubtextFont':
-            guidanceCustomizationSubtextFont ?? '',
-        'guidanceCustomizationButtonFont':
-            guidanceCustomizationButtonFont ?? '',
         'guidanceCustomizationButtonTextNormalColor':
             guidanceCustomizationButtonTextNormalColor ?? '',
         'guidanceCustomizationButtonBackgroundNormalColor':
@@ -96,20 +82,12 @@ class ThemeBuilder {
             guidanceCustomizationButtonBorderWidth ?? '',
         'guidanceCustomizationButtonCornerRadius':
             guidanceCustomizationButtonCornerRadius ?? '',
-        'guidanceCustomizationReadyScreenHeaderFont':
-            guidanceCustomizationReadyScreenHeaderFont ?? '',
         'guidanceCustomizationReadyScreenHeaderTextColor':
             guidanceCustomizationReadyScreenHeaderTextColor ?? '',
-        'guidanceCustomizationReadyScreenSubtextFont':
-            guidanceCustomizationReadyScreenSubtextFont ?? '',
         'guidanceCustomizationReadyScreenSubtextTextColor':
             guidanceCustomizationReadyScreenSubtextTextColor ?? '',
-        'guidanceCustomizationRetryScreenHeaderFont':
-            guidanceCustomizationRetryScreenHeaderFont ?? '',
         'guidanceCustomizationRetryScreenHeaderTextColor':
             guidanceCustomizationRetryScreenHeaderTextColor ?? '',
-        'guidanceCustomizationRetryScreenSubtextFont':
-            guidanceCustomizationRetryScreenSubtextFont ?? '',
         'guidanceCustomizationRetryScreenSubtextTextColor':
             guidanceCustomizationRetryScreenSubtextTextColor ?? '',
         'guidanceCustomizationRetryScreenImageBorderColor':
@@ -137,8 +115,6 @@ class ThemeBuilder {
             resultScreenCustomizationResultAnimationBackgroundColor ?? '',
         'resultScreenCustomizationResultAnimationForegroundColor':
             resultScreenCustomizationResultAnimationForegroundColor ?? '',
-        'resultScreenCustomizationMessageFont':
-            resultScreenCustomizationMessageFont ?? '',
         'ovalCustomizationStrokeWidth': ovalCustomizationStrokeWidth ?? '',
         'ovalCustomizationStrokeColor': ovalCustomizationStrokeColor ?? '',
         'ovalCustomizationProgressStrokeWidth':
@@ -162,6 +138,5 @@ class ThemeBuilder {
         'feedbackCustomizationBackgroundColors':
             feedbackCustomizationBackgroundColors ?? '',
         'feedbackCustomizationTextColor': feedbackCustomizationTextColor ?? '',
-        'feedbackCustomizationTextFont': feedbackCustomizationTextFont ?? '',
       };
 }
