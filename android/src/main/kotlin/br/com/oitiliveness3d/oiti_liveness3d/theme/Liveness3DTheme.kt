@@ -8,8 +8,8 @@ import br.com.oiti.liveness3d.theme.Liveness3DTheme
 
 class Liveness3DTheme(
     private val textsBuilder: Map<String, String?>?,
-    //Guidance customization
 ) {
+    //Guidance customization
     private val guidanceCustomizationBackgroundColors: String? = textsBuilder?.get("guidanceCustomizationBackgroundColors")
     private val guidanceCustomizationForegroundColor: String? = textsBuilder?.get("guidanceCustomizationForegroundColor")
 
