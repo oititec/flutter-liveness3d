@@ -92,7 +92,8 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
         textsBuilder: Map<String, String?>?,
         themeBuilder: Map<String, String?>?,
         fontsBuilder: Map<String, String?>?,
-        loadingAppearance: Map<String, Any?>?) {
+        loadingAppearance: Map<String, Any?>?
+    ){
         try {
             manager = AltLiveness3d(context, result, appKey, environment, textsBuilder, themeBuilder, fontsBuilder, loadingAppearance)
             val intent = manager?.getIntent()
