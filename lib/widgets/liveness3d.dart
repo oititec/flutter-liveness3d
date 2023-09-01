@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oiti_liveness3d/widgets/camera_permission.dart';
 import 'package:oiti_liveness3d/widgets/components/info_card.dart';
@@ -7,6 +8,8 @@ import 'package:oiti_liveness3d/oiti_liveness3d.dart';
 import 'package:oiti_liveness3d/common/enumerations.dart';
 import 'package:oiti_liveness3d/common/loading_appearance.dart';
 import 'package:oiti_liveness3d/common/texts_builder.dart';
+import 'package:oiti_liveness3d/common/theme_builder.dart';
+import 'package:oiti_liveness3d/common/fonts_builder.dart';
 import 'package:oiti_liveness3d/common/liveness_success_result.dart';
 
 class Liveness3DWidget extends StatelessWidget {
@@ -14,6 +17,8 @@ class Liveness3DWidget extends StatelessWidget {
   final String appKey;
   final Environment environment;
   final TextsBuilder? textsBuilder;
+  final ThemeBuilder? themeBuilder;
+  final Liveness3dFonts? fontsBuilder;
   final LoadingAppearence? loadingAppearance;
   final OitiLiveness3d _channel = OitiLiveness3d();
   final Function(LivenessSuccessResult result) onSuccess;
@@ -25,6 +30,8 @@ class Liveness3DWidget extends StatelessWidget {
     required this.appKey,
     required this.environment,
     this.textsBuilder,
+    this.themeBuilder,
+    this.fontsBuilder,
     this.loadingAppearance,
     required this.onSuccess,
     required this.onError,
@@ -190,6 +197,8 @@ class Liveness3DWidget extends StatelessWidget {
                     appKey: appKey,
                     environment: environment,
                     textsBuilder: textsBuilder,
+                    themeBuilder: themeBuilder,
+                    fontsBuilder: fontsBuilder,
                     loading: loadingAppearance,
                   )
                   .then((result) => onSuccess(result))
