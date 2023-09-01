@@ -2,6 +2,7 @@ package br.com.oitiliveness3d.oiti_liveness3d.utils
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.util.Log
 import br.com.oiti.liveness3d.app.ui.HybridLiveness3DActivity
 import br.com.oiti.liveness3d.data.model.*
@@ -21,7 +22,8 @@ class AltLiveness3d(
 
     private fun getUser(): Liveness3DUser {
         val env: ENVIRONMENT3D = if (environment.equals("PRD")) ENVIRONMENT3D.PRD else ENVIRONMENT3D.HML
-        val theme = Liveness3DTheme(themeBuilder).apply()
+        val theme = Liveness3DTheme(context, themeBuilder).apply()
+
         return Liveness3DUser(
             appKey = appKey!!,
             environment = env,
@@ -43,7 +45,7 @@ class AltLiveness3d(
 
         val texts = getTexts(textsBuilder)
         val fonts = getFonts(fontsBuilder)
-
+        Log.d("FONTS BUILDER AQUII", fontsBuilder.toString())
         val loadingColor = (loadingAppearance?.get("foreground") ?: "#05D758") as String
         val loadingBackgroundColor = (loadingAppearance?.get("background") ?: "#FFFFFF") as String
         val loadingSize = (loadingAppearance?.get("size") ?: 1) as Int
@@ -101,19 +103,20 @@ class AltLiveness3d(
         }
     }
 
-    private fun getFonts(fontsBuilder: Map<String, String?>?): HashMap<Liveness3DFontsKey, String> {
-        val hashMap = HashMap<Liveness3DFontsKey, String>()
+    private fun getFonts(fontsBuilder: Map<String, String?>?): HashMap<Liveness3DFontsKey?, String?> {
+        val hashMap = HashMap<Liveness3DFontsKey?, String?>()
         if (fontsBuilder != null) {
             val fontsMap = fontsBuilder
                 .mapNotNull {
                     val key = getFontKey(it.key)
                     val value = it.value
-                    if (key != null && value != null) {
-                        Pair(key, value)
-                    } else { null }
+                    if (value?.isEmpty() == true) {
+                        null
+                    } else { Pair(key, "fonts/$value.ttf".lowercase()) }
                 }
                 .toMap()
             hashMap.putAll(fontsMap)
+            Log.d("HASH AQUII", hashMap.toString())
         }
         return hashMap
     }

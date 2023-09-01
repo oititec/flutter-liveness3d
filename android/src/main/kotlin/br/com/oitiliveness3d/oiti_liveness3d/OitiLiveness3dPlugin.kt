@@ -3,6 +3,7 @@ package br.com.oitiliveness3d.oiti_liveness3d
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import br.com.oiti.security.observability.firebase.FirebaseEvents
 import br.com.oitiliveness3d.oiti_liveness3d.utils.AltLiveness3d
 import br.com.oitiliveness3d.oiti_liveness3d.utils.AltLiveness3dException

@@ -11,8 +11,8 @@ class ThemeBuilder {
   String? guidanceCustomizationButtonTextDisabledColor;
   String? guidanceCustomizationButtonBackgroundDisabledColor;
   String? guidanceCustomizationButtonBorderColor;
-  String? guidanceCustomizationButtonBorderWidth;
-  String? guidanceCustomizationButtonCornerRadius;
+  int? guidanceCustomizationButtonBorderWidth;
+  int? guidanceCustomizationButtonCornerRadius;
 
   /* Ready Screen */
   String? guidanceCustomizationReadyScreenHeaderTextColor;
@@ -22,8 +22,8 @@ class ThemeBuilder {
   String? guidanceCustomizationRetryScreenHeaderTextColor;
   String? guidanceCustomizationRetryScreenSubtextTextColor;
   String? guidanceCustomizationRetryScreenImageBorderColor;
-  String? guidanceCustomizationRetryScreenImageBorderWidth;
-  String? guidanceCustomizationRetryScreenImageCornerRadius;
+  int? guidanceCustomizationRetryScreenImageBorderWidth;
+  int? guidanceCustomizationRetryScreenImageCornerRadius;
   String? guidanceCustomizationRetryScreenOvalStrokeColor;
 
   /* Result Screen */
@@ -37,16 +37,16 @@ class ThemeBuilder {
   String? resultScreenCustomizationResultAnimationForegroundColor;
 
   /* Oval */
-  String? ovalCustomizationStrokeWidth;
+  int? ovalCustomizationStrokeWidth;
   String? ovalCustomizationStrokeColor;
-  String? ovalCustomizationProgressStrokeWidth;
+  int? ovalCustomizationProgressStrokeWidth;
   String? ovalCustomizationProgressColor1;
   String? ovalCustomizationProgressColor2;
   String? ovalCustomizationProgressRadialOffset;
 
   /* Frame */
-  String? frameCustomizationBorderWidth;
-  String? frameCustomizationCornerRadius;
+  int? frameCustomizationBorderWidth;
+  int? frameCustomizationCornerRadius;
   String? frameCustomizationBorderColor;
   String? frameCustomizationBackgroundColor;
   String? frameCustomizationElevation;
@@ -55,88 +55,84 @@ class ThemeBuilder {
   String? overlayCustomizationBackgroundColor;
 
   /* Feedback */
-  String? feedbackCustomizationCornerRadius;
+  int? feedbackCustomizationCornerRadius;
   String? feedbackCustomizationBackgroundColors;
   String? feedbackCustomizationTextColor;
 
   Map toJson() => {
         'guidanceCustomizationBackgroundColors':
-            guidanceCustomizationBackgroundColors ?? '',
+            guidanceCustomizationBackgroundColors,
         'guidanceCustomizationForegroundColor':
-            guidanceCustomizationForegroundColor ?? '',
+            guidanceCustomizationForegroundColor,
         'guidanceCustomizationButtonTextNormalColor':
-            guidanceCustomizationButtonTextNormalColor ?? '',
+            guidanceCustomizationButtonTextNormalColor,
         'guidanceCustomizationButtonBackgroundNormalColor':
-            guidanceCustomizationButtonBackgroundNormalColor ?? '',
+            guidanceCustomizationButtonBackgroundNormalColor,
         'guidanceCustomizationButtonTextHighlightColor':
-            guidanceCustomizationButtonTextHighlightColor ?? '',
+            guidanceCustomizationButtonTextHighlightColor,
         'guidanceCustomizationButtonBackgroundHighlightColor':
-            guidanceCustomizationButtonBackgroundHighlightColor ?? '',
+            guidanceCustomizationButtonBackgroundHighlightColor,
         'guidanceCustomizationButtonTextDisabledColor':
-            guidanceCustomizationButtonTextDisabledColor ?? '',
+            guidanceCustomizationButtonTextDisabledColor,
         'guidanceCustomizationButtonBackgroundDisabledColor':
-            guidanceCustomizationButtonBackgroundDisabledColor ?? '',
+            guidanceCustomizationButtonBackgroundDisabledColor,
         'guidanceCustomizationButtonBorderColor':
-            guidanceCustomizationButtonBorderColor ?? '',
+            guidanceCustomizationButtonBorderColor,
         'guidanceCustomizationButtonBorderWidth':
-            guidanceCustomizationButtonBorderWidth ?? '',
+            guidanceCustomizationButtonBorderWidth,
         'guidanceCustomizationButtonCornerRadius':
-            guidanceCustomizationButtonCornerRadius ?? '',
+            guidanceCustomizationButtonCornerRadius,
         'guidanceCustomizationReadyScreenHeaderTextColor':
-            guidanceCustomizationReadyScreenHeaderTextColor ?? '',
+            guidanceCustomizationReadyScreenHeaderTextColor,
         'guidanceCustomizationReadyScreenSubtextTextColor':
-            guidanceCustomizationReadyScreenSubtextTextColor ?? '',
+            guidanceCustomizationReadyScreenSubtextTextColor,
         'guidanceCustomizationRetryScreenHeaderTextColor':
-            guidanceCustomizationRetryScreenHeaderTextColor ?? '',
+            guidanceCustomizationRetryScreenHeaderTextColor,
         'guidanceCustomizationRetryScreenSubtextTextColor':
-            guidanceCustomizationRetryScreenSubtextTextColor ?? '',
+            guidanceCustomizationRetryScreenSubtextTextColor,
         'guidanceCustomizationRetryScreenImageBorderColor':
-            guidanceCustomizationRetryScreenImageBorderColor ?? '',
+            guidanceCustomizationRetryScreenImageBorderColor,
         'guidanceCustomizationRetryScreenImageBorderWidth':
-            guidanceCustomizationRetryScreenImageBorderWidth ?? '',
+            guidanceCustomizationRetryScreenImageBorderWidth,
         'guidanceCustomizationRetryScreenImageCornerRadius':
-            guidanceCustomizationRetryScreenImageCornerRadius ?? '',
+            guidanceCustomizationRetryScreenImageCornerRadius,
         'guidanceCustomizationRetryScreenOvalStrokeColor':
-            guidanceCustomizationRetryScreenOvalStrokeColor ?? '',
+            guidanceCustomizationRetryScreenOvalStrokeColor,
         'resultScreenCustomizationForegroundColor':
-            resultScreenCustomizationForegroundColor ?? '',
+            resultScreenCustomizationForegroundColor,
         'resultScreenCustomizationBackgroundColors':
-            resultScreenCustomizationBackgroundColors ?? '',
+            resultScreenCustomizationBackgroundColors,
         'resultScreenCustomizationActivityIndicatorColor':
-            resultScreenCustomizationActivityIndicatorColor ?? '',
+            resultScreenCustomizationActivityIndicatorColor,
         'resultScreenCustomizationCustomActivityIndicatorRotationIntervar':
             resultScreenCustomizationCustomActivityIndicatorRotationIntervar ??
                 '',
         'resultScreenCustomizationUploadProgressFillColor':
-            resultScreenCustomizationUploadProgressFillColor ?? '',
+            resultScreenCustomizationUploadProgressFillColor,
         'resultScreenCustomizationUploadProgressTrackColor':
-            resultScreenCustomizationUploadProgressTrackColor ?? '',
+            resultScreenCustomizationUploadProgressTrackColor,
         'resultScreenCustomizationResultAnimationBackgroundColor':
-            resultScreenCustomizationResultAnimationBackgroundColor ?? '',
+            resultScreenCustomizationResultAnimationBackgroundColor,
         'resultScreenCustomizationResultAnimationForegroundColor':
-            resultScreenCustomizationResultAnimationForegroundColor ?? '',
-        'ovalCustomizationStrokeWidth': ovalCustomizationStrokeWidth ?? '',
-        'ovalCustomizationStrokeColor': ovalCustomizationStrokeColor ?? '',
+            resultScreenCustomizationResultAnimationForegroundColor,
+        'ovalCustomizationStrokeWidth': ovalCustomizationStrokeWidth,
+        'ovalCustomizationStrokeColor': ovalCustomizationStrokeColor,
         'ovalCustomizationProgressStrokeWidth':
-            ovalCustomizationProgressStrokeWidth ?? '',
-        'ovalCustomizationProgressColor1':
-            ovalCustomizationProgressColor1 ?? '',
-        'ovalCustomizationProgressColor2':
-            ovalCustomizationProgressColor2 ?? '',
+            ovalCustomizationProgressStrokeWidth,
+        'ovalCustomizationProgressColor1': ovalCustomizationProgressColor1,
+        'ovalCustomizationProgressColor2': ovalCustomizationProgressColor2,
         'ovalCustomizationProgressRadialOffset':
-            ovalCustomizationProgressRadialOffset ?? '',
-        'frameCustomizationBorderWidth': frameCustomizationBorderWidth ?? '',
-        'frameCustomizationCornerRadius': frameCustomizationCornerRadius ?? '',
-        'frameCustomizationBorderColor': frameCustomizationBorderColor ?? '',
-        'frameCustomizationBackgroundColor':
-            frameCustomizationBackgroundColor ?? '',
-        'frameCustomizationElevation': frameCustomizationElevation ?? '',
+            ovalCustomizationProgressRadialOffset,
+        'frameCustomizationBorderWidth': frameCustomizationBorderWidth,
+        'frameCustomizationCornerRadius': frameCustomizationCornerRadius,
+        'frameCustomizationBorderColor': frameCustomizationBorderColor,
+        'frameCustomizationBackgroundColor': frameCustomizationBackgroundColor,
+        'frameCustomizationElevation': frameCustomizationElevation,
         'overlayCustomizationBackgroundColor':
-            overlayCustomizationBackgroundColor ?? '',
-        'feedbackCustomizationCornerRadius':
-            feedbackCustomizationCornerRadius ?? '',
+            overlayCustomizationBackgroundColor,
+        'feedbackCustomizationCornerRadius': feedbackCustomizationCornerRadius,
         'feedbackCustomizationBackgroundColors':
-            feedbackCustomizationBackgroundColors ?? '',
-        'feedbackCustomizationTextColor': feedbackCustomizationTextColor ?? '',
+            feedbackCustomizationBackgroundColors,
+        'feedbackCustomizationTextColor': feedbackCustomizationTextColor,
       };
 }

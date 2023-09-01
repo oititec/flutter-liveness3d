@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:oiti_liveness3d/common/enumerations.dart';
 import 'package:oiti_liveness3d/common/texts_builder.dart';
 import 'package:oiti_liveness3d/common/theme_builder.dart';
+import 'package:oiti_liveness3d/common/fonts_builder.dart';
 import 'package:oiti_liveness3d/common/loading_appearance.dart';
 import 'package:oiti_liveness3d/common/liveness_success_result.dart';
 import 'package:oiti_liveness3d/oiti_liveness3d.dart';
@@ -22,7 +23,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late TextEditingController _controller;
-  var appKey = '';
+  var appKey =
+      'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjZXJ0aWZhY2UiLCJ1c2VyIjoiODBGREE3MDJCM0RDRTBCM0JFNDc1ODJCQjlGREREM0QwfG1vYmlsZS5hcGlnbG9iYWwiLCJlbXBDb2QiOiIwMDAwMDAwNjc5IiwiZmlsQ29kIjoiMDAwMDAwMjc3NCIsImNwZiI6IjU0MjczOTY2MDg1Iiwibm9tZSI6IjQxNkNGOTZGMzYxQjc3ODM3M0RCQzM5MUUwNEVDMjI3ODQyNzAxOUM4RDFEOEI4REYxOTQ3NUVCOUE1NDREMzdGNjJFQ0U2RjIxRDJCOTkxMThEOUI5N0JFMjY4NTA3MUVEMTlEQkQ5NTg2NDlCMDI0MTIxMzlFNkU5ODNBMkYyfEFTSEFVQVMgQVNVSEFTSFUgQVNVSCIsIm5hc2NpbWVudG8iOiIwOC8xMC8xOTkxIiwiZWFzeS1pbmRleCI6IkFBQUFFcFRMM1kwbkRtSEkvUERrUkhZZWE0RzNxbXlZTmpuSTBqNGhuckt5ZzRlV2t3eGxRMGkzL3hwVUVBPT0iLCJrZXkiOiJUM1YwSUcxaGVTQm1aWGNnYm05eWRHaDNZWEprSUdKbGJHbGxkbWx1WnlCaGRIUT0iLCJleHAiOjE2OTM1NjY5NzIsImlhdCI6MTY5MzU2NjY3Mn0.NadaxATQ_9HT6DeQgoOCRsk-s8UlGBjqF_Bso9NqmN4';
   final environment = Environment.hml;
   final acitivityLoading = LoadingAppearence(
     type: LoadingType.activity,
@@ -83,8 +85,13 @@ class _MyAppState extends State<MyApp> {
               _liveness3DWidgetOption(
                 context,
                 'Custom Theme',
-                builder: _textsCustomization(),
                 themeBuilder: _themeCustomization(),
+              ),
+              _liveness3DWidgetOption(
+                context,
+                'Custom Fonts',
+                builder: _textsCustomization(),
+                fontsBuilder: _fontsCustomization(),
               ),
               Padding(
                 padding: const EdgeInsets.all(20),
@@ -109,6 +116,7 @@ class _MyAppState extends State<MyApp> {
     String title, {
     TextsBuilder? builder,
     ThemeBuilder? themeBuilder,
+    Liveness3dFonts? fontsBuilder,
     LoadingAppearence? loading,
   }) {
     return Padding(
@@ -125,6 +133,7 @@ class _MyAppState extends State<MyApp> {
               environment: environment,
               textsBuilder: builder,
               themeBuilder: themeBuilder,
+              fontsBuilder: fontsBuilder,
               loadingAppearance: loading,
               onSuccess: (result) => _onLiveness3DSuccess(result),
               onError: (error) => _onLiveness3DError(error),
@@ -203,7 +212,17 @@ class _MyAppState extends State<MyApp> {
 
   ThemeBuilder _themeCustomization() {
     return ThemeBuilder()
-      ..guidanceCustomizationButtonBackgroundNormalColor = '#000000';
+      ..guidanceCustomizationButtonBackgroundNormalColor = '#8e9334'
+      ..ovalCustomizationStrokeColor = '#8e9334';
+  }
+
+  Liveness3dFonts _fontsCustomization() {
+    return Liveness3dFonts()
+      ..guidanceCustomizationHeaderFont = 'Lobster'
+      ..guidanceCustomizationSubtextFont = 'Lobster'
+      ..readyScreenCustomizationHeaderFont = 'Lobster'
+      ..guidanceCustomizationButtonFont = 'Lobster'
+      ..feedbackCustomizationTextFont = 'Lobster';
   }
 
   Future<void> _showAlertDialog(

@@ -13,6 +13,9 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		E8BC0C992AA1CF6A00C05585 /* Lobster.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8BC0C982AA1CF6A00C05585 /* Lobster.ttf */; };
+		E8BC0C9B2AA1CFE000C05585 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BC0C9A2AA1CFE000C05585 /* Fonts.swift */; };
+		E8BC0C9D2AA1D08500C05585 /* PrintSystemFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8BC0C9C2AA1D08500C05585 /* PrintSystemFonts.swift */; };
 		EF2B1C6BC0C232692115BFDE /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CADC3288A089C97960F3BF2 /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +49,9 @@
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E621FE0FAA2BEE9CB37A88F /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		D5396586C624F297F4E9694F /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
+		E8BC0C982AA1CF6A00C05585 /* Lobster.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Lobster.ttf; path = ../../../assets/fonts/Lobster.ttf; sourceTree = "<group>"; };
+		E8BC0C9A2AA1CFE000C05585 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		E8BC0C9C2AA1D08500C05585 /* PrintSystemFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintSystemFonts.swift; sourceTree = "<group>"; };
 		F5383A431B8C60CB14C91428 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +118,7 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				E8BC0C972AA1CF1E00C05585 /* Fonts */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -120,8 +127,18 @@
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
+				E8BC0C9A2AA1CFE000C05585 /* Fonts.swift */,
+				E8BC0C9C2AA1D08500C05585 /* PrintSystemFonts.swift */,
 			);
 			path = Runner;
+			sourceTree = "<group>";
+		};
+		E8BC0C972AA1CF1E00C05585 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E8BC0C982AA1CF6A00C05585 /* Lobster.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
+				E8BC0C992AA1CF6A00C05585 /* Lobster.ttf in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
@@ -276,6 +294,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
+				E8BC0C9D2AA1D08500C05585 /* PrintSystemFonts.swift in Sources */,
+				E8BC0C9B2AA1CFE000C05585 /* Fonts.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
