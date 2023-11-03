@@ -1,26 +1,26 @@
 PODS:
   - Flutter (1.0.0)
-  - OICommons (1.1.0)
+  - OICommons (1.1.1)
   - OIComponents (1.2.1):
     - OICommons (~> 1.1.0)
-  - OILiveness3D (1.0.1):
+  - OILiveness3D (1.0.2):
     - OICommons (~> 1.1.0)
     - OIComponents (~> 1.2.1)
-    - OILiveness3D_FT (= 9.6.40)
+    - OILiveness3D_FT (= 9.6.45)
     - OINetwork (~> 1.2.0)
-  - OILiveness3D_FT (9.6.40)
-  - OINetwork (1.2.0):
+  - OILiveness3D_FT (9.6.45)
+  - OINetwork (1.2.1):
     - OICommons (~> 1.1.0)
   - oiti_liveness3d (0.0.1):
     - Flutter
-    - OILiveness3D (= 1.0.1)
+    - OILiveness3D (= 1.0.2)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - oiti_liveness3d (from `.symlinks/plugins/oiti_liveness3d/ios`)
 
 SPEC REPOS:
-  https://github.com/oititec/ios-artifactory:
+  https://github.com/oititec/ios-artifactory.git:
     - OICommons
     - OIComponents
     - OILiveness3D
@@ -35,13 +35,13 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  OICommons: c304a4f3aa3f0fe9282eae013a45fde717ad42bf
+  OICommons: b92a165581d7c3cadc67433b76261e01813e0abe
   OIComponents: 8cf47c0dc9b3477e8e4d5513c99b0c83283da3ce
-  OILiveness3D: bc88532d22ccf41d90062545ea41d32a45e42137
-  OILiveness3D_FT: a58ceb6ea1b1229015434125d25b78b46f7667a9
-  OINetwork: 3cf1ea4bd61a98bd68db7d1caa3f175b4868f5b4
-  oiti_liveness3d: 87320ff5c944006e685a0dd15b6d711dcfdca76a
+  OILiveness3D: 2828c88c5124c12afd135922236b3580fa0542bb
+  OILiveness3D_FT: b57fa712db35bad58a1fcc522837175022b6db8d
+  OINetwork: 8660d3a489ab299db3295c9be287fad51ff32dcb
+  oiti_liveness3d: c12551b3bad0a4d3d63beef4ab8de8070bd00941
 
 PODFILE CHECKSUM: 7087fd2174588fcd196392818c34ba0b6eafa3fd
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.12.0

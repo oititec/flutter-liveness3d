@@ -3,6 +3,7 @@ package br.com.oitiliveness3d.oiti_liveness3d
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import br.com.oiti.security.observability.firebase.FirebaseEvents
 import br.com.oitiliveness3d.oiti_liveness3d.utils.AltLiveness3d
 import br.com.oitiliveness3d.oiti_liveness3d.utils.AltLiveness3dException
@@ -62,8 +63,10 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
                 val appKey = call.argument<String>("appkey")
                 val environment = call.argument<String>("environment")
                 val textsBuilder = call.argument<Map<String, String?>>("texts")
+                val themeBuilder = call.argument<Map<String, String?>>("theme")
+                val fontsBuilder = call.argument<Map<String, String?>>("fonts")
                 val loading = call.argument<Map<String, Any?>>("loading")
-                startLiveness3d(appKey, environment, textsBuilder, loading)
+                startLiveness3d(appKey, environment, textsBuilder, themeBuilder, fontsBuilder, loading)
             }
 
             "OITI.checkPermission" -> {
@@ -84,9 +87,16 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
         }
     }
 
-    private fun startLiveness3d(appKey: String?, environment: String?, textsBuilder: Map<String, String?>?, loadingAppearance: Map<String, Any?>?) {
+    private fun startLiveness3d(
+        appKey: String?,
+        environment: String?,
+        textsBuilder: Map<String, String?>?,
+        themeBuilder: Map<String, String?>?,
+        fontsBuilder: Map<String, String?>?,
+        loadingAppearance: Map<String, Any?>?
+    ){
         try {
-            manager = AltLiveness3d(context, result, appKey, environment, textsBuilder, loadingAppearance)
+            manager = AltLiveness3d(context, result, appKey, environment, textsBuilder, themeBuilder, fontsBuilder, loadingAppearance)
             val intent = manager?.getIntent()
             activity?.startActivityForResult(intent, L3_RESULT_REQUEST)
         } catch (e: AltLiveness3dException) {

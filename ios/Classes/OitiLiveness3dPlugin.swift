@@ -82,9 +82,13 @@ public class OitiLiveness3dPlugin: NSObject, FlutterPlugin {
         }()
         
         let texts = liveness3DTexts(from: arguments["texts"])
+        let theme = liveness3DTheme(theme: arguments["theme"],fonts: arguments["fonts"])
+        
         let user = Liveness3DUser(
             appKey: appKey,
             environment: environment,
+            defaultTheme: theme,
+            lowLightTheme: theme,
             texts: texts
         )
         
