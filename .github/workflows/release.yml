@@ -1,6 +1,6 @@
 name: Publish to PUB.DEV
 on:
-  release:
+  push:
     branches: [master]
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
       - name: Analyze
-        run: flutter Analyze
+        run: flutter analyze
       - name: Run Tests
         run: flutter test
       - name: Format Code
@@ -28,4 +28,4 @@ jobs:
         with:
           credentialJson: ${{ secrets.CREDENTIAL_JSON }}
           flutter: true
-          skipTests: false
+          skipTests: true
