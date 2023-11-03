@@ -1,18 +1,19 @@
+name: Publish to PUB.DEV
 on:
   release:
-    branches:
-      - master
+    branches: [master]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     environment: PRD
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: "3.3.3"
-      - name: Install dependencies
+      - name: Install Dependencies
         run: flutter pub get
       - name: Analyze
         run: flutter Analyze
