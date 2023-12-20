@@ -60,52 +60,49 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Liveness 3D - Flutter'),
         ),
-        body: Center(
-          child: Column(
-            children: [
-              _liveness3DWidgetOption(
-                context,
-                'Default',
-              ),
-              _liveness3DWidgetOption(
-                context,
-                'Spinner Loading',
-                loading: spinnerLoading,
-              ),
-              _liveness3DWidgetOption(
-                context,
-                'Activity Loading',
-                loading: acitivityLoading,
-              ),
-              _liveness3DWidgetOption(
-                context,
-                'Custom Texts',
-                builder: _textsCustomization(),
-              ),
-              _liveness3DWidgetOption(
-                context,
-                'Custom Theme',
-                themeBuilder: _themeCustomization(),
-              ),
-              _liveness3DWidgetOption(
-                context,
-                'Custom Fonts',
-                builder: _textsCustomization(),
-                fontsBuilder: _fontsCustomization(),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Text(resultContent),
-              ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child:
-                    Text(appKey.isEmpty ? 'AppKey vazia' : 'AppKey disponivel'),
-              ),
-              appKeySection(),
-            ],
-          ),
+        body: ListView(
+          children: [
+            _liveness3DWidgetOption(
+              context,
+              'Default',
+            ),
+            _liveness3DWidgetOption(
+              context,
+              'Spinner Loading',
+              loading: spinnerLoading,
+            ),
+            _liveness3DWidgetOption(
+              context,
+              'Activity Loading',
+              loading: acitivityLoading,
+            ),
+            _liveness3DWidgetOption(
+              context,
+              'Custom Texts',
+              builder: _textsCustomization(),
+            ),
+            _liveness3DWidgetOption(
+              context,
+              'Custom Theme',
+              themeBuilder: _themeCustomization(),
+            ),
+            _liveness3DWidgetOption(
+              context,
+              'Custom Fonts',
+              builder: _textsCustomization(),
+              fontsBuilder: _fontsCustomization(),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Text(resultContent),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child:
+                  Text(appKey.isEmpty ? 'AppKey vazia' : 'AppKey disponivel'),
+            ),
+            appKeySection(),
+          ],
         ),
       ),
     );
