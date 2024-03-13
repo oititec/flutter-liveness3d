@@ -28,7 +28,7 @@ Com este guia, os desenvolvedores poderão iniciar rapidamente a integração de
 
 - \*[Guia de Tratamento de Retornos Flutter](https://devcenter.certiface.io/docs/guia-de-tratamento-de-retornos-flutter)
 
-\*\*Documentação voltada para os desenvolvedores que desejam entender e trabalhar com as respostas das nossas <glossary:ferramentas>. Ele detalha os diferentes tipos de respostas que nosso produto pode fornecer e explica como interpretar, utilizar e efetuar os tratamentos dos retornos obtidos.
+\*\*Documentação voltada para os desenvolvedores que desejam entender e trabalhar com as respostas das nossas ferramentas. Ele detalha os diferentes tipos de respostas que nosso produto pode fornecer e explica como interpretar, utilizar e efetuar os tratamentos dos retornos obtidos.
 
 - \*[Guia Customização(Liveness3D)](https://devcenter.certiface.io/docs/customizacao-liveness3d-flutter)
 

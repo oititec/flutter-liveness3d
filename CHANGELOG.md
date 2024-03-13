@@ -1,6 +1,21 @@
-## versão 2.0.3
+## versão 3.0.1
+
+_data: 20/12/2023_
+
+- **Novidades**
+  - Atualizado cores e customizações da doccore;
+
+## versão 3.0.0
+
+_data: 20/12/2023_
+
+- **Novidades**
+  - Customização de textos, cores e fontes;
+  - Import com apenas uma chamada;
 
 ## versão 2.0.2
+
+- **Teste de Publicação**
 
 ## versão 2.0.0
 
