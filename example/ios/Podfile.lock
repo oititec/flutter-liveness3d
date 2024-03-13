@@ -1,19 +1,22 @@
 PODS:
   - Flutter (1.0.0)
-  - OICommons (1.1.1)
-  - OIComponents (1.2.1):
-    - OICommons (~> 1.1.0)
-  - OILiveness3D (1.0.2):
-    - OICommons (~> 1.1.0)
-    - OIComponents (~> 1.2.1)
-    - OILiveness3D_FT (= 9.6.45)
-    - OINetwork (~> 1.2.0)
-  - OILiveness3D_FT (9.6.45)
-  - OINetwork (1.2.1):
-    - OICommons (~> 1.1.0)
+  - OICommons (1.1.2)
+  - OIComponents (1.4.0):
+    - OICommons (~> 1.1)
+  - OILiveness3D (2.0.0):
+    - OICommons (~> 1.1)
+    - OIComponents (~> 1.4)
+    - OILiveness3D_FT (= 9.6.72)
+    - OINetwork (~> 1.2)
+    - OISecurity (~> 1.4)
+  - OILiveness3D_FT (9.6.72)
+  - OINetwork (1.3.0):
+    - OICommons (~> 1.1)
+  - OISecurity (1.4.4):
+    - OINetwork (~> 1.3)
   - oiti_liveness3d (0.0.1):
     - Flutter
-    - OILiveness3D (= 1.0.2)
+    - OILiveness3D (= 2.0.0)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -26,6 +29,7 @@ SPEC REPOS:
     - OILiveness3D
     - OILiveness3D_FT
     - OINetwork
+    - OISecurity
 
 EXTERNAL SOURCES:
   Flutter:
@@ -35,13 +39,14 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  OICommons: b92a165581d7c3cadc67433b76261e01813e0abe
-  OIComponents: 8cf47c0dc9b3477e8e4d5513c99b0c83283da3ce
-  OILiveness3D: 2828c88c5124c12afd135922236b3580fa0542bb
-  OILiveness3D_FT: b57fa712db35bad58a1fcc522837175022b6db8d
-  OINetwork: 8660d3a489ab299db3295c9be287fad51ff32dcb
-  oiti_liveness3d: c12551b3bad0a4d3d63beef4ab8de8070bd00941
+  OICommons: c46002bc48a3c700796a740445ca72ac462c53c1
+  OIComponents: cd9fdb1c53ad2d2cf7f6d62453a98db86067c667
+  OILiveness3D: e6f1fd14217d92386e556db2521b02a1b6c05a65
+  OILiveness3D_FT: 58f1093f99de7b3b4f91d8220256c452f26be412
+  OINetwork: 35d74266149b8e04a51706633552b508955e8e47
+  OISecurity: 46bfe19eb8be2905bb78403b41288bab9ad55a6e
+  oiti_liveness3d: 9b80bf7af18487a33f7ec1d7044cbff74949a115
 
 PODFILE CHECKSUM: 7087fd2174588fcd196392818c34ba0b6eafa3fd
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.13.0
