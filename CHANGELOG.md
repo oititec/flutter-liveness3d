@@ -1,9 +1,9 @@
 ## versão 3.0.1
 
-_data: 20/12/2023_
+_data: 13/03/2024_
 
 - **Novidades**
-  - Atualizado cores e customizações da doccore;
+  - Criado exemplo de chamada para pular telas de instruções;
 
 ## versão 3.0.0
 
