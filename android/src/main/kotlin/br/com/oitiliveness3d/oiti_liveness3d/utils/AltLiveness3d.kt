@@ -45,7 +45,7 @@ class AltLiveness3d(
 
         val texts = getTexts(textsBuilder)
         val fonts = getFonts(fontsBuilder)
-        Log.d("FONTS BUILDER AQUII", fontsBuilder.toString())
+        
         val loadingColor = (loadingAppearance?.get("foreground") ?: "#05D758") as String
         val loadingBackgroundColor = (loadingAppearance?.get("background") ?: "#FFFFFF") as String
         val loadingSize = (loadingAppearance?.get("size") ?: 1) as Int

@@ -23,21 +23,23 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late TextEditingController _controller;
-  var appKey =
-      'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjZXJ0aWZhY2UiLCJ1c2VyIjoiODBGREE3MDJCM0RDRTBCM0JFNDc1ODJCQjlGREREM0QwfG1vYmlsZS5hcGlnbG9iYWwiLCJlbXBDb2QiOiIwMDAwMDAwNjc5IiwiZmlsQ29kIjoiMDAwMDAwMjc3NCIsImNwZiI6IjU0MjczOTY2MDg1Iiwibm9tZSI6IjQxNkNGOTZGMzYxQjc3ODM3M0RCQzM5MUUwNEVDMjI3ODQyNzAxOUM4RDFEOEI4REYxOTQ3NUVCOUE1NDREMzdGNjJFQ0U2RjIxRDJCOTkxMThEOUI5N0JFMjY4NTA3MUVEMTlEQkQ5NTg2NDlCMDI0MTIxMzlFNkU5ODNBMkYyfEFTSEFVQVMgQVNVSEFTSFUgQVNVSCIsIm5hc2NpbWVudG8iOiIwOC8xMC8xOTkxIiwiZWFzeS1pbmRleCI6IkFBQUFFcFRMM1kwbkRtSEkvUERrUkhZZWE0RzNxbXlZTmpuSTBqNGhuckt5ZzRlV2t3eGxRMGkzL3hwVUVBPT0iLCJrZXkiOiJUM1YwSUcxaGVTQm1aWGNnYm05eWRHaDNZWEprSUdKbGJHbGxkbWx1WnlCaGRIUT0iLCJleHAiOjE2OTM1NjY5NzIsImlhdCI6MTY5MzU2NjY3Mn0.NadaxATQ_9HT6DeQgoOCRsk-s8UlGBjqF_Bso9NqmN4';
+  var appKey = '';
   final environment = Environment.hml;
+
   final acitivityLoading = LoadingAppearence(
     type: LoadingType.activity,
     size: 2,
     backgroundColor: "#FFFFFF",
     loadingColor: "#000000",
   );
+
   final spinnerLoading = LoadingAppearence(
     type: LoadingType.spinner,
     size: 7,
     backgroundColor: "#000000",
     loadingColor: "#FFFFFF",
   );
+
   var resultTitle = '';
   var resultContent = '';
 
@@ -92,6 +94,11 @@ class _MyAppState extends State<MyApp> {
               builder: _textsCustomization(),
               fontsBuilder: _fontsCustomization(),
             ),
+            _hideInstructionWidgetOption(
+              context,
+              'Liveness 3D - Pular Telas',
+              themeBuilder: _themeCustomization(),
+            ),
             Padding(
               padding: const EdgeInsets.all(20),
               child: Text(resultContent),
@@ -104,6 +111,56 @@ class _MyAppState extends State<MyApp> {
             appKeySection(),
           ],
         ),
+      ),
+    );
+  }
+
+  hideInstructions(
+    BuildContext context,
+    String appKey,
+    Environment environment,
+    ThemeBuilder? themeBuilder,
+  ) {
+    OitiLiveness3d().checkPermission().then((authorized) => {
+          if (authorized)
+            {
+              OitiLiveness3d()
+                  .openLiveness3D(
+                    appKey: appKey,
+                    themeBuilder: themeBuilder,
+                    environment: environment,
+                  )
+                  .then((result) async => {_onLiveness3DSuccess(result)})
+                  .onError(
+                      (error, stackTrace) async => {_onLiveness3DError(error)})
+                  .catchError((error) async => {_onLiveness3DError(error)})
+                  .whenComplete(() => _showAlertDialog(
+                        context,
+                        resultTitle,
+                        resultContent,
+                      ))
+            }
+        });
+  }
+
+  Widget _hideInstructionWidgetOption(
+    BuildContext context,
+    String title, {
+    ThemeBuilder? themeBuilder,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 5),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size.fromHeight(50),
+        ),
+        onPressed: () => hideInstructions(
+          context,
+          appKey,
+          environment,
+          themeBuilder,
+        ),
+        child: Text(title),
       ),
     );
   }
