@@ -48,10 +48,8 @@ void main() {
     const appKey = 'app-key';
     const environment = Environment.hml;
 
-    final result = await plugin.openLiveness3D(
-      appKey: appKey,
-      environment: environment
-    );
+    final result =
+        await plugin.openLiveness3D(appKey: appKey, environment: environment);
 
     expect(result.valid, false);
     expect(result.cause, 'PROVA DE VIDA');

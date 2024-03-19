@@ -76,12 +76,6 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
                 askPermission()
             }
 
-            "OITI.eventLog" -> {
-                val event = call.argument<String>("event")
-                val appKey = call.argument<String>("appkey") ?: ""
-                logEvent(event, appKey)
-            }
-
             else -> { result.notImplemented() }
         }
     }
@@ -106,7 +100,6 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
     }
 
     private fun logEvent(name: String?, appKey: String) {
-        
     }
 
     private fun checkPermission() {

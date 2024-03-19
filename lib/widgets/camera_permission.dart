@@ -16,8 +16,6 @@ class CameraPermissionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _channel.eventLog("STATE_L3FT_permissionView");
-
     return MaterialApp(
       title: 'Flutter layout demo',
       home: Scaffold(
@@ -80,7 +78,6 @@ class CameraPermissionWidget extends StatelessWidget {
                     ),
                     onPressed: () {
                       try {
-                        _channel.eventLog("ACTION_L3FT_permissionVerify");
                         _channel.askPermission().then(
                           (granted) {
                             _canCloseWidget = false;
