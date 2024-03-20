@@ -1,6 +1,6 @@
 name: oiti_liveness3d
 description: A pluggin from Oititec to add Livenees3d on your project.
-version: 3.0.1
+version: 3.0.2
 homepage: "https://oititec.com.br/"
 repository: "https://github.com/oititec/flutter-liveness3d"
 

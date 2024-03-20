@@ -19,8 +19,6 @@ void main() {
             'protocol': '123455123',
             'blob': null,
           };
-        case 'OITI.eventLog':
-          return true;
         case 'OITI.checkPermission':
           return true;
         case 'OITI.askPermission':

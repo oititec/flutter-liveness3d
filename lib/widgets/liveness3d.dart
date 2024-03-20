@@ -38,8 +38,6 @@ class Liveness3DWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _channel.eventLog("STATE_L3FT_instructionView");
-
     return ScreenUtilInit(
       minTextAdapt: true,
       splitScreenMode: true,
@@ -65,7 +63,6 @@ class Liveness3DWidget extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        _channel.eventLog("ACTION_L3FT_instructionContinue");
                         onError("User cancelled the journey");
                         Navigator.pop(context);
                       },
@@ -171,8 +168,6 @@ class Liveness3DWidget extends StatelessWidget {
                             ),
                             onPressed: () {
                               _continueAction(context);
-                              _channel
-                                  .eventLog("ACTION_L3FT_instructionContinue");
                             },
                             child: const Text("Continuar"),
                           ),

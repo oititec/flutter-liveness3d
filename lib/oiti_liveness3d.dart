@@ -38,10 +38,6 @@ class OitiLiveness3d {
     );
   }
 
-  Future<void> eventLog(String? event) async {
-    return await OitiLiveness3dPlatform.instance.eventLog(event);
-  }
-
   Future checkPermission() async {
     return await OitiLiveness3dPlatform.instance.checkPermission();
   }

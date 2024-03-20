@@ -29,18 +29,6 @@ class MethodChannelOitiLiveness3d extends OitiLiveness3dPlatform {
   }
 
   @override
-  Future<void> eventLog(
-    String? event,
-  ) async {
-    return await methodChannel.invokeMethod(
-      'OITI.eventLog',
-      {
-        'event': event,
-      },
-    );
-  }
-
-  @override
   Future checkPermission() async {
     return await methodChannel.invokeMethod(
       'OITI.checkPermission',
