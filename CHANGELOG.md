@@ -1,3 +1,10 @@
+## versão 3.0.2
+
+_data: 20/03/2024_
+
+- **Novidades**
+  - Removido classe FirebaseEvent(android)
+
 ## versão 3.0.1
 
 _data: 13/03/2024_

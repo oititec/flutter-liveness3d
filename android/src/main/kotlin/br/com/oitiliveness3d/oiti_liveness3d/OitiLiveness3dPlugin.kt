@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import br.com.oiti.security.observability.firebase.FirebaseEvents
 import br.com.oitiliveness3d.oiti_liveness3d.utils.AltLiveness3d
 import br.com.oitiliveness3d.oiti_liveness3d.utils.AltLiveness3dException
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -77,12 +76,6 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
                 askPermission()
             }
 
-            "OITI.eventLog" -> {
-                val event = call.argument<String>("event")
-                val appKey = call.argument<String>("appkey") ?: ""
-                logEvent(event, appKey)
-            }
-
             else -> { result.notImplemented() }
         }
     }
@@ -107,8 +100,6 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
     }
 
     private fun logEvent(name: String?, appKey: String) {
-        FirebaseEvents(name.toString(), appKey).apply()
-        result.success(null)
     }
 
     private fun checkPermission() {

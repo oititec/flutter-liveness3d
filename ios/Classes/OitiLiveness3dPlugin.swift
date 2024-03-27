@@ -29,8 +29,6 @@ public class OitiLiveness3dPlugin: NSObject, FlutterPlugin {
                 result(AVChecker.checkCameraPermission())
             case "OITI.askPermission":
                 AVChecker.requestCameraAccess(result: { result($0) })
-            case "OITI.eventLog":
-                try eventLog(arguments: callArguments, result: result)
             case "OITI.openSettingsApp":
                 openSettingsApp(result: result)
             default:
@@ -100,16 +98,6 @@ public class OitiLiveness3dPlugin: NSObject, FlutterPlugin {
         
         viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: true)
-    }
-    
-    private func eventLog(arguments rawArguments: Any?, result: @escaping FlutterResult) throws {
-        guard let arguments = rawArguments as? Dictionary<String, Any> else {
-            throw PluginError.invalidArguments
-        }
-        
-        let event = (arguments["event"] as? String) ?? ""
-        print(event)
-        result(nil)
     }
     
     func openSettingsApp(result: @escaping FlutterResult) {
