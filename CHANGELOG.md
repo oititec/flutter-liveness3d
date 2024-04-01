@@ -3,7 +3,7 @@
 _data: 27/03/2024_
 
 - **Novidades**
-  - Atualizacão Facetec
+  - Atualizacão da Facetec
 
 ## versão 3.0.2
 
