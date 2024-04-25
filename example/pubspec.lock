@@ -126,11 +126,9 @@ packages:
   oiti_liveness3d:
     dependency: "direct main"
     description:
-      path: "."
-      ref: "test/assets"
-      resolved-ref: "16931224d2e957b606661db10c47ea7dd6a1b0e4"
-      url: "https://github.com/oititec/flutter-liveness3d.git"
-    source: git
+      path: ".."
+      relative: true
+    source: path
     version: "3.1.1"
   path:
     dependency: transitive
