@@ -1,3 +1,18 @@
+## versão 3.1.2
+
+_data: 25/04/2024_
+
+- **Novidades**
+  - Adicionado package no caminho dos assets.
+
+## versão 3.1.1
+
+_data: 23/04/2024_
+
+- **Novidades**
+  - Check permission atualizado no android.
+  - Assets realocados.
+
 ## versão 3.1.0
 
 _data: 27/03/2024_

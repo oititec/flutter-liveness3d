@@ -1,9 +1,13 @@
 package br.com.oitiliveness3d.oiti_liveness3d
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.util.Log
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import br.com.oitiliveness3d.oiti_liveness3d.utils.AltLiveness3d
 import br.com.oitiliveness3d.oiti_liveness3d.utils.AltLiveness3dException
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -18,6 +22,7 @@ import io.flutter.plugin.common.PluginRegistry
 class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, PluginRegistry.ActivityResultListener {
     companion object {
         private const val L3_RESULT_REQUEST = 9564
+        private const val CAMERA_PERMISSION_REQUEST_CODE = 4234
     }
 
     private lateinit var channel: MethodChannel
@@ -103,11 +108,37 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
     }
 
     private fun checkPermission() {
-        result.success(true)
+        val currentActivity = activity
+        if (currentActivity != null) {
+            if (ContextCompat.checkSelfPermission(currentActivity, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                result.success(true)
+            } else {
+                result.success(false)
+
+            }
+        } else {
+            result.error("UNAVAILABLE", "Could not get current activity.", null)
+        }
     }
 
     private fun askPermission() {
-        result.success(true)
+        val currentActivity = activity
+
+        if (currentActivity != null) {
+            if (ContextCompat.checkSelfPermission(currentActivity, Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+                result.success(true)
+            } else {
+                ActivityCompat.requestPermissions(
+                    currentActivity,
+                    arrayOf(Manifest.permission.CAMERA),
+                    CAMERA_PERMISSION_REQUEST_CODE
+                )
+            }
+        } else {
+            result.error("ActivityUnavailable", "Activity is null", null)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
