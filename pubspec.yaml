@@ -23,7 +23,9 @@ dev_dependencies:
 
 flutter:
   assets:
-    - lib/assets/images/
+    #   - lib/assets/images/
+    - packages/oiti_liveness3d/assets/images/
+
   plugin:
     platforms:
       android:

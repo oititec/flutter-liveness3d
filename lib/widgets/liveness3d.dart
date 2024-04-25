@@ -69,7 +69,7 @@ class Liveness3DWidget extends StatelessWidget {
                       child: titleSection,
                     ),
                     Image.asset(
-                      'assets/images/img_face.png',
+                      'packages/oiti_liveness3d/assets/images/img_face.png',
                       height: 270.sp,
                       fit: BoxFit.cover,
                     ),
@@ -117,11 +117,11 @@ class Liveness3DWidget extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   InfoCardWidget(
-                                    'assets/images/lightbulb_outline.png',
+                                    'packages/oiti_liveness3d/assets/images/lightbulb_outline.png',
                                     'Escolha um ambiente bem iluminado.',
                                   ),
                                   InfoCardWidget(
-                                    'assets/images/face.png',
+                                    'packages/oiti_liveness3d/assets/images/face.png',
                                     'Não use acessórios como bonés, máscaras e afins.',
                                   ),
                                 ],
@@ -220,7 +220,7 @@ class Liveness3DWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(
-                'assets/images/left-arrow.png',
+                'packages/oiti_liveness3d/assets/images/left-arrow.png',
                 height: 22,
                 fit: BoxFit.cover,
               ),

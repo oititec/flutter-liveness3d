@@ -38,7 +38,7 @@ class CameraPermissionWidget extends StatelessWidget {
               child: titleSection,
             ),
             Image.asset(
-              'assets/images/camera_alt.png',
+              'packages/oiti_liveness3d/assets/images/camera_alt.png',
               height: 100,
               fit: BoxFit.cover,
             ),
@@ -119,7 +119,7 @@ class CameraPermissionWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(
-                'assets/images/left-arrow-b.png',
+                'packages/oiti_liveness3d/assets/images/left-arrow-b.png',
                 height: 22,
                 fit: BoxFit.cover,
               ),
