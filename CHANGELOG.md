@@ -1,3 +1,10 @@
+## versão 3.1.3
+
+_data: 06/05/2024_
+
+- **Novidades**
+  - Atualização de dependencias.
+
 ## versão 3.1.2
 
 _data: 25/04/2024_
