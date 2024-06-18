@@ -1,3 +1,12 @@
+## versão 3.3.0
+
+_data: 18/06/2024_
+
+- **Novidades**
+  - Atualizacão da Facetec
+  - Atualizacão iOS SDK (2.1.4)
+  - Atualizacão iOS Android (9.2.9)
+
 ## versão 3.2.0
 
 _data: 22/05/2024_
