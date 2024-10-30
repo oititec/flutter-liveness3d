@@ -1,6 +1,15 @@
-## versão 3.5.0
+## versão 3.6.0
 
-_data: 24/07/2024_
+_data: 29/10/2024_
+
+- **Novidades**
+  - Atualizacão da Facetec
+  - Atualizacão iOS SDK (2.3.0)
+  - Atualizacão Android SDK (9.4.0)
+
+## versão 3.5.1
+
+_data: 24/09/2024_
 
 - **Novidades**
   - Atualizacão da Facetec
