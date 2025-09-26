@@ -1,34 +1,38 @@
 PODS:
   - Flutter (1.0.0)
-  - OICommons (2.0.1)
+  - OICommons (2.1.0)
   - OIComponents (1.8.0)
-  - OILiveness3D (2.6.0):
-    - OICommons (~> 2.0.1)
+  - OILiveness3D (3.2.0):
+    - OICommons (~> 2.1.0)
     - OIComponents (~> 1.8)
-    - OILiveness3D_FT (= 9.7.48)
+    - OILiveness3D/Release (= 3.2.0)
+    - OILiveness3D_FT (= 9.7.66)
+    - OINetwork (~> 2.1.2)
+    - OISecurity (~> 4.1.0)
+  - OILiveness3D/Release (3.2.0):
+    - OICommons (~> 2.1.0)
+    - OIComponents (~> 1.8)
+    - OILiveness3D_FT (= 9.7.66)
+    - OINetwork (~> 2.1.2)
+    - OISecurity (~> 4.1.0)
+  - OILiveness3D_FT (9.7.66)
+  - OINetwork (2.1.2):
+    - OICommons (~> 2.1.0)
+  - OISecurity (4.1.0):
     - OINetwork (~> 2.1.1)
-    - OISecurity (~> 4.0.1)
-  - OILiveness3D_FT (9.7.48)
-  - OINetwork (2.1.1):
-    - OICommons (~> 2.0.1)
-  - OISecurity (4.0.1):
+    - OISecurity/Release (= 4.1.0)
+  - OISecurity/Release (4.1.0):
     - OINetwork (~> 2.1.1)
-    - Sentry (~> 8.36)
   - oiti_liveness3d (3.6.0):
     - Flutter
-    - OILiveness3D (= 2.6.0)
-  - Sentry (8.44.0):
-    - Sentry/Core (= 8.44.0)
-  - Sentry/Core (8.44.0)
+    - OILiveness3D (= 3.2.0)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - oiti_liveness3d (from `.symlinks/plugins/oiti_liveness3d/ios`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - Sentry
-  https://github.com/oititec/ios-artifactory.git:
+  https://github.com/oititec/ios-artifactory-beta.git:
     - OICommons
     - OIComponents
     - OILiveness3D
@@ -44,15 +48,14 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  OICommons: efb4251c578f2517dc222b56cb101f83d5e7ece2
-  OIComponents: 06145be8e23f9d3e89a4ee9293139849e21b22da
-  OILiveness3D: 1446beb68038c11260631ca549bcd36886885636
-  OILiveness3D_FT: d5e272b4388af36a8ae0500781d8f7d2b93faba6
-  OINetwork: f551750f82cb46fb8e3f3668a84d1a46fa1872d6
-  OISecurity: 68bb3f29bd02fe5c20a0967950b8afa4c8589029
-  oiti_liveness3d: efab5b2a6073c890a38aa67a140c80a4c3c53dcf
-  Sentry: 0f9bc9adfc0b960e7f3bb5ec67e9a3d8193f3bdb
+  OICommons: 0823ab3c7ea4bc33d409208dfbb4c5c04fc32467
+  OIComponents: b056c2e7a2474ac70e4d1bebfe7ae81c85ba3578
+  OILiveness3D: 740592904b20e230dd6e4ebb775d855fc4e3a307
+  OILiveness3D_FT: 6767192930e192bca5a2f80e9025ae7d9983f837
+  OINetwork: 026528034592540763350410d1ce7c0ddb1349f5
+  OISecurity: 768cb737c478caa40d978037aa3c021bd83d57c2
+  oiti_liveness3d: ea44ed1ea1b63b93582eb2f5b91b9c06208d0a30
 
-PODFILE CHECKSUM: 9b205f5e868c6e4948cd7dfcba7ef885a9df6829
+PODFILE CHECKSUM: 0147cad182ee7750349bd1b9670672d55c431352
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

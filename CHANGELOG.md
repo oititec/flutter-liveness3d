@@ -1,3 +1,68 @@
+## versão 4.5.0
+
+- **Novidades**
+  - Atualizacão da Facetec
+  - Atualizacão iOS SDK (3.7.0)
+  - Atualizacão Android SDK (9.4.10)
+
+## versão 4.4.0
+
+- **Novidades**
+  - Atualizacão da Facetec
+  - Atualizacão iOS SDK (3.6.0)
+  - Atualizacão Android SDK (9.4.9)
+
+## versão 4.3.0
+
+- **Novidades**
+  - Atualizacão da Facetec
+  - Atualizacão iOS SDK (3.4.0)
+  - Atualizacão Android SDK (9.4.8)
+
+## versão 4.2.0
+
+- **Novidades**
+  - Atualizacão da Facetec
+  - Atualizacão iOS SDK (3.2.0)
+  - Atualizacão Android SDK (9.4.7)
+
+## versão 4.1.1
+
+- **Novidades**
+  - Atualizacão da Facetec
+
+## versão 4.1.0
+
+- **Novidades**
+  - Atualizacão da Facetec
+  - Atualizacão iOS SDK (3.1.0)
+  - Atualizacão Android SDK (9.4.6)
+
+## versão 4.0.0
+
+- **Novidades**
+  - Alterado URL de destino de environment do enum `.HML` e `.PRD`.
+  - Atualizacão iOS SDK (3.0.0)
+
+## versão 3.8.0
+
+- **Novidades**
+  - Atualizacão da Facetec
+  - Atualizacão iOS SDK (2.7.0)
+  - Atualizacão Android SDK (9.4.3)
+
+_data: 10/02/2025_
+
+- **Novidades**
+  - Ajuste na importação do módulo OILiveness2D
+
+## versão 3.7.1
+
+_data: 10/02/2025_
+
+- **Novidades**
+  - Ajuste na importação do módulo OILiveness2D
+
 ## versão 3.7.0
 
 _data: 31/01/2025_
