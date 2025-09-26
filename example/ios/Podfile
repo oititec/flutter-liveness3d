@@ -33,6 +33,8 @@ target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
+  pod 'OILiveness3D', git: 'https://github.com/oititec/ios-liveness-3d.git', branch: 'feature/26853-facetec-update'
+  
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
 
