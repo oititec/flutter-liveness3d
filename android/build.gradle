@@ -10,8 +10,8 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.android.tools.build:gradle:8.9.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath("com.android.tools.build:gradle:8.9.1")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
 
@@ -20,37 +20,34 @@ allprojects {
         google()
         mavenCentral()
     }
-
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-
     namespace 'br.com.oitiliveness3d.oiti_liveness3d'
     compileSdkVersion 36
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_11
     }
 
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs += "src/main/kotlin"
     }
 
     defaultConfig {
-        minSdkVersion 21
+        minSdk = 24
     }
 
-}
-
-dependencies {
-    implementation 'br.com.oiti:liveness3d-sdk:9.5.1'
-    implementation 'br.com.oiti:security:1.2'
+    dependencies {
+        implementation("br.com.oiti:liveness3d-sdk:9.5.1")
+        implementation("br.com.oiti:security:1.2")
+    }
 }

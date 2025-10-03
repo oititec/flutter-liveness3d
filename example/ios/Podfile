@@ -3,8 +3,8 @@ platform :ios, '12.4'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
-source 'https://github.com/oititec/ios-artifactory-beta.git'
-source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/oititec/ios-artifactory.git'
+source 'https://cdn.cocoapods.org'
 
 project 'Runner', {
   'Debug' => :debug,
@@ -32,8 +32,6 @@ flutter_ios_podfile_setup
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
-
-  pod 'OILiveness3D', git: 'https://github.com/oititec/ios-liveness-3d.git', branch: 'feature/26853-facetec-update'
   
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
