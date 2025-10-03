@@ -11,3 +11,11 @@ GeneratedPluginRegistrant.java
 key.properties
 **/*.keystore
 **/*.jks
+
+# Fastalane
+google-services.json
+**/fastlane/report.xml
+**/fastlane/nul
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output

@@ -1,27 +1,9 @@
-buildscript {
-    ext {
-        agp_version2 = '8.7.0'
-        agp_version1 = '8.9.0'
-        agp_version = '7.2.0'
-    }
-    ext.kotlin_version = '1.7.10'
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath "com.android.tools.build:gradle:$agp_version2"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
 allprojects {
     repositories {
         google()
         mavenCentral()
         maven {
-            url 'https://raw.githubusercontent.com/oititec/android-oiti-versions-beta/master'
+            url 'https://raw.githubusercontent.com/oititec/android-oiti-versions/master'
         }
     }
 }

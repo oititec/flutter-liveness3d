@@ -23,7 +23,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late TextEditingController _controller;
-  var appKey = 'sdfsdf234234sdfsdfsdf';
+  var appKey = 'APP_KEY';
   final environment = Environment.hml;
 
   final acitivityLoading = LoadingAppearence(
