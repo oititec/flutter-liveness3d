@@ -2,28 +2,39 @@ PODS:
   - Flutter (1.0.0)
   - OICommons (2.1.2)
   - OIComponents (1.8.0)
-  - OILiveness3D (3.8.0):
+  - OILiveness3D (3.11.0):
     - OICommons (~> 2.1.2)
-    - OIComponents (~> 1.8.0)
-    - OILiveness3D_FT (= 9.7.84)
+    - OIComponents (= 1.8.0)
+    - OILiveness3D/Release (= 3.11.0)
+    - OILiveness3D_FT (= 9.7.103)
     - OINetwork (~> 2.1.2)
     - OISecurity (~> 4.2)
-  - OILiveness3D_FT (9.7.84)
+  - OILiveness3D/Release (3.11.0):
+    - OICommons (~> 2.1.2)
+    - OIComponents (= 1.8.0)
+    - OILiveness3D_FT (= 9.7.103)
+    - OINetwork (~> 2.1.2)
+    - OISecurity (~> 4.2)
+  - OILiveness3D_FT (9.7.103)
   - OINetwork (2.1.2):
     - OICommons (~> 2.1.0)
   - OISecurity (4.2.0):
     - OICommons (~> 2.1.1)
     - OINetwork (~> 2.1.2)
-  - oiti_liveness3d (3.7.0):
+    - OISecurity/Release (= 4.2.0)
+  - OISecurity/Release (4.2.0):
+    - OICommons (~> 2.1.1)
+    - OINetwork (~> 2.1.2)
+  - oiti_liveness3d (4.8.0):
     - Flutter
-    - OILiveness3D (= 3.8.0)
+    - OILiveness3D (= 3.11.0)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - oiti_liveness3d (from `.symlinks/plugins/oiti_liveness3d/ios`)
 
 SPEC REPOS:
-  https://github.com/oititec/ios-artifactory:
+  https://github.com/oititec/ios-artifactory-beta.git:
     - OICommons
     - OIComponents
     - OILiveness3D
@@ -39,14 +50,14 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
-  OICommons: cd3bf615b5c80c6d33a0bf993c75ecf6d5e38ae8
-  OIComponents: 06145be8e23f9d3e89a4ee9293139849e21b22da
-  OILiveness3D: 1c8d9972c35c394d1c10566dee16b2c729b27dfd
-  OILiveness3D_FT: cd3fd7f44e03d745c138a6c7add1bdde27e73a9a
+  OICommons: a08a554367d396ca5b3e3ba0a5a2f07aca01e54e
+  OIComponents: b056c2e7a2474ac70e4d1bebfe7ae81c85ba3578
+  OILiveness3D: 8f7a23cc02e12193f77f259d2d5c507b62b871ba
+  OILiveness3D_FT: 2cb1607f99c1fa70582757b8982d6c0c0298a5fb
   OINetwork: 026528034592540763350410d1ce7c0ddb1349f5
-  OISecurity: c8074823189df9c4bc4196e1be362064f9e75c80
-  oiti_liveness3d: 98ca1b9a76cea9465ebab224cb5837e7b482e23f
+  OISecurity: 63b15bfda964b6d5f36be691880a1eae3a9eb2df
+  oiti_liveness3d: 3e26c3e5ee1de4959c1925eca3db23796043237e
 
-PODFILE CHECKSUM: 191376748e509d98c3ece4bad60df8b2bcfd8ab9
+PODFILE CHECKSUM: 2e840b9353dba311194d7810a84227ee46a5d649
 
 COCOAPODS: 1.16.2

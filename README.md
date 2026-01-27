@@ -19,7 +19,7 @@ Simplificamos nossos guias de integração e de customização do Flutter:
 
 - [Guias de Instalação](https://devcenter.certiface.io/docs/guia-de-instalacao-flutter)
 - [Guia de Uso e Integração](https://devcenter.certiface.io/docs/guia-de-uso-e-integracao-flutter)
-- [Guia de Tratamento de Retorno](https://devcenter.certiface.io/docs/guia-de-tratamento-de-retornos-flutter)
+- [Guia de Tratamento de Retorno](./RETURNS.md) | [Documentação Online](https://devcenter.certiface.io/docs/guia-de-tratamento-de-retornos-flutter)
 - [Guias de Customização](https://devcenter.certiface.io/docs/customizacao-flutter)
 
 ## Changelog
