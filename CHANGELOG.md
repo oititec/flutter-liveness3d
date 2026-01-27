@@ -1,3 +1,17 @@
+## versão 4.8.0
+
+- **Novidades**
+  - Atualizacão da Facetec
+  - Atualizacão iOS SDK (3.11.0)
+  - Atualizacão Android SDK (9.5.4)
+
+## versão 4.7.0
+
+- **Novidades**
+  - Atualizacão da Facetec
+  - Atualizacão iOS SDK (3.10.0)
+  - Atualizacão Android SDK (9.5.3)
+
 ## versão 4.6.0
 
 - **Novidades**
