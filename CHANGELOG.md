@@ -4,7 +4,9 @@
   - Atualizacão da Facetec
   - Atualizacão iOS SDK (3.11.0)
   - Atualizacão Android SDK (9.5.4)
-  - A propriedade `resultScreenCustomizationResultAnimationBackgroundImage` foi alterada para buscar um drawable no contexto da aplicação nativa apenas no Android
+
+  Android:
+  - A propriedade `resultScreenCustomizationResultAnimationBackgroundImage` foi adicionada para buscar um drawable no contexto da aplicação nativa apenas no Android.
 
 ## versão 4.7.0
 
