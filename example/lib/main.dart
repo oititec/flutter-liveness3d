@@ -266,8 +266,13 @@ class _MyAppState extends State<MyApp> {
 
   ThemeBuilder _themeCustomization() {
     return ThemeBuilder()
-      ..guidanceCustomizationButtonBackgroundNormalColor = '#8e9334'
-      ..ovalCustomizationStrokeColor = '#8e9334';
+      ..guidanceCustomizationReadyScreenHeaderTextColor = '#b30000'
+      ..guidanceCustomizationReadyScreenSubtextTextColor = '#3900b3'
+      ..resultScreenCustomizationActivityIndicatorColor = '#b30000'
+      ..resultScreenCustomizationResultAnimationForegroundColor = '#b30000'
+      ..resultScreenCustomizationResultAnimationBackgroundColor = '#05D7FF'
+      ..resultScreenCustomizationForegroundColor = '#8800ff'
+      ..resultScreenCustomizationResultAnimationBackgroundImage = 'success_icon_2';
   }
 
   Liveness3dFonts _fontsCustomization() {

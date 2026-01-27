@@ -35,6 +35,7 @@ class ThemeBuilder {
   String? resultScreenCustomizationUploadProgressTrackColor;
   String? resultScreenCustomizationResultAnimationBackgroundColor;
   String? resultScreenCustomizationResultAnimationForegroundColor;
+  String? resultScreenCustomizationResultAnimationBackgroundImage;
 
   /* Oval */
   int? ovalCustomizationStrokeWidth;
@@ -107,6 +108,7 @@ class ThemeBuilder {
         'resultScreenCustomizationCustomActivityIndicatorRotationIntervar':
             resultScreenCustomizationCustomActivityIndicatorRotationIntervar ??
                 '',
+        'resultScreenCustomizationResultAnimationBackgroundImage': resultScreenCustomizationResultAnimationBackgroundImage,
         'resultScreenCustomizationUploadProgressFillColor':
             resultScreenCustomizationUploadProgressFillColor,
         'resultScreenCustomizationUploadProgressTrackColor':
