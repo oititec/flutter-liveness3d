@@ -1,5 +1,5 @@
 group 'br.com.oitiliveness3d.oiti_liveness3d'
-version '3.5.1'
+version '3.5.2'
 
 buildscript {
     ext.kotlin_version = '2.1.21'
@@ -20,7 +20,7 @@ allprojects {
         google()
         mavenCentral()
         maven {
-            url 'https://raw.githubusercontent.com/oititec/android-oiti-versions-beta/master'
+            url 'https://raw.githubusercontent.com/oititec/android-oiti-versions/master'
         }
     }
 }
@@ -50,7 +50,7 @@ android {
     }
 
     dependencies {
-        implementation("br.com.oiti:liveness3d-sdk:9.5.4")
+        implementation("br.com.oiti:liveness3d-sdk:9.5.5")
         implementation("br.com.oiti:security:1.2")
     }
 }
