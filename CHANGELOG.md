@@ -1,3 +1,10 @@
+## versão 4.8.1
+
+- **Novidades**
+  - Ajustes nos _callbacks_ do liveness.
+  - Atualizacão iOS SDK (3.11.1)
+  - Atualizacão Android SDK (9.5.5)
+
 ## versão 4.8.0
 
 - **Novidades**

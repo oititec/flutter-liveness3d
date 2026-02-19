@@ -3,7 +3,7 @@ platform :ios, '13.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
-source 'https://github.com/oititec/ios-artifactory-beta.git'
+source 'https://github.com/oititec/ios-artifactory.git'
 source 'https://cdn.cocoapods.org'
 
 project 'Runner', {
@@ -34,6 +34,7 @@ target 'Runner' do
   use_modular_headers!
   
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+  pod 'Wormholy'
 end
 
 post_install do |installer|
