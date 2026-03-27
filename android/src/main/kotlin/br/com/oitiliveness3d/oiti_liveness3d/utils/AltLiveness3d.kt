@@ -20,12 +20,12 @@ class AltLiveness3d(
     private val loadingAppearance: Map<String, Any?>?
 ) {
 
-    private fun getUser(): Liveness3DUser {
+    private fun getUser(validAppKey: String): Liveness3DUser {
         val env: ENVIRONMENT3D = if (environment.equals("PRD")) ENVIRONMENT3D.PRD else ENVIRONMENT3D.HML
         val theme = Liveness3DTheme(context, themeBuilder).apply()
 
         return Liveness3DUser(
-            appKey = appKey!!,
+            appKey = validAppKey,
             environment = env,
             liveness3DTheme = theme
         )
@@ -35,8 +35,12 @@ class AltLiveness3d(
         if (appKey.isNullOrBlank()) {
             throw InvalidAppKey()
         }
+        val validAppKey = appKey.trim()
+        if (validAppKey.isEmpty()) {
+            throw InvalidAppKey()
+        }
 
-        val user = getUser()
+        val user = getUser(validAppKey)
         val endpoint = when(user.environment) {
             ENVIRONMENT3D.PRD -> "https://certiface.com.br"
             ENVIRONMENT3D.HML -> "https://comercial.certiface.com.br"

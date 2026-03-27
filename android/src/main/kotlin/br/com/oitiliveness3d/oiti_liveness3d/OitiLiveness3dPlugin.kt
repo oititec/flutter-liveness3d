@@ -29,23 +29,31 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
     private lateinit var context: Context
     private lateinit var result: Result
     private var activity: Activity? = null
+    private var activityBinding: ActivityPluginBinding? = null
     private var manager: AltLiveness3d? = null
+    private var activeLivenessResult: Result? = null
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        activityBinding = binding
         activity = binding.activity
         binding.addActivityResultListener(this)
     }
 
     override fun onDetachedFromActivity() {
+        activityBinding?.removeActivityResultListener(this)
+        activityBinding = null
         activity = null
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
+        activityBinding = binding
         activity = binding.activity
         binding.addActivityResultListener(this)
     }
 
     override fun onDetachedFromActivityForConfigChanges() {
+        activityBinding?.removeActivityResultListener(this)
+        activityBinding = null
         activity = null
     }
 
@@ -70,7 +78,7 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
                 val themeBuilder = call.argument<Map<String, String?>>("theme")
                 val fontsBuilder = call.argument<Map<String, String?>>("fonts")
                 val loading = call.argument<Map<String, Any?>>("loading")
-                startLiveness3d(appKey, environment, textsBuilder, themeBuilder, fontsBuilder, loading)
+                startLiveness3d(appKey, environment, textsBuilder, themeBuilder, fontsBuilder, loading, result)
             }
 
             "OITI.checkPermission" -> {
@@ -91,16 +99,42 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
         textsBuilder: Map<String, String?>?,
         themeBuilder: Map<String, String?>?,
         fontsBuilder: Map<String, String?>?,
-        loadingAppearance: Map<String, Any?>?
-    ){
+        loadingAppearance: Map<String, Any?>?,
+        channelResult: Result
+    ) {
+        if (activeLivenessResult != null) {
+            channelResult.error(
+                "LIVENESS_IN_PROGRESS",
+                "A liveness session is already active.",
+                null
+            )
+            return
+        }
+        val currentActivity = activity
+        if (currentActivity == null) {
+            channelResult.error("UNAVAILABLE", "Could not get current activity.", null)
+            return
+        }
         try {
-            manager = AltLiveness3d(context, result, appKey, environment, textsBuilder, themeBuilder, fontsBuilder, loadingAppearance)
-            val intent = manager?.getIntent()
-            activity?.startActivityForResult(intent, L3_RESULT_REQUEST)
+            activeLivenessResult = channelResult
+            manager = AltLiveness3d(
+                context,
+                channelResult,
+                appKey,
+                environment,
+                textsBuilder,
+                themeBuilder,
+                fontsBuilder,
+                loadingAppearance
+            )
+            val intent = manager!!.getIntent()
+            currentActivity.startActivityForResult(intent, L3_RESULT_REQUEST)
         } catch (e: AltLiveness3dException) {
-            result.error(e.code, e.message, null)
+            activeLivenessResult = null
+            channelResult.error(e.code, e.message, null)
         } catch (e: Exception) {
-            result.error("UNKNOWN_ERROR", e.message, e.stackTrace)
+            activeLivenessResult = null
+            channelResult.error("UNKNOWN_ERROR", e.message, e.stackTrace)
         }
     }
 
@@ -143,10 +177,13 @@ class OitiLiveness3dPlugin : FlutterPlugin, MethodCallHandler, ActivityAware, Pl
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
         if (requestCode == L3_RESULT_REQUEST) {
-            when(resultCode) {
+            when (resultCode) {
                 Activity.RESULT_OK -> manager?.onLiveness3DResultSuccess(data)
                 Activity.RESULT_CANCELED -> manager?.onLiveness3DResultCancelled(data)
+                else -> manager?.onLiveness3DResultCancelled(data)
             }
+            activeLivenessResult = null
+            manager = null
             return true
         }
         return false

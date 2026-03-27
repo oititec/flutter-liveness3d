@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
+    _controller = TextEditingController(text: appKey);
   }
 
   @override
@@ -215,14 +215,14 @@ class _MyAppState extends State<MyApp> {
         ),
         obscureText: false,
         controller: _controller,
-        onSubmitted: (value) => _pasteAppKey(),
+        onChanged: _updateAppKey,
+        onSubmitted: (value) => _updateAppKey(value),
       ),
     );
   }
 
-  _pasteAppKey() {
-    setState(() => appKey = _controller.text);
-    _controller.text = '';
+  _updateAppKey(String value) {
+    setState(() => appKey = value.trim());
   }
 
   TextsBuilder _textsCustomization() {
