@@ -1,3 +1,9 @@
+## versão 4.10.0
+
+- **Novidades**
+  - Atualizacão iOS SDK (3.14.0)
+  - Atualizacão Android SDK (9.5.8)
+
 ## versão 4.9.1
 
 - **Novidades**

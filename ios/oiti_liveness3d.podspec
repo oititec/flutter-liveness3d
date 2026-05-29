@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'oiti_liveness3d'
-  s.version          = '4.9.0'
+  s.version          = '4.10.0'
   s.summary          = 'A new Flutter plugin project.'
   s.description      = <<-DESC
 A new Flutter plugin project.
@@ -15,7 +15,7 @@ A new Flutter plugin project.
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'OILiveness3D', '3.12.0'
+  s.dependency 'OILiveness3D', '3.14.0'
   s.platform = :ios, '12.4'
 
   # Flutter.framework does not contain a i386 slice.
