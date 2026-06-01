@@ -215,14 +215,9 @@ class _MyAppState extends State<MyApp> {
         ),
         obscureText: false,
         controller: _controller,
-        onSubmitted: (value) => _pasteAppKey(),
+        onChanged: (value) => setState(() => appKey = value.trim()),
       ),
     );
-  }
-
-  _pasteAppKey() {
-    setState(() => appKey = _controller.text);
-    _controller.text = '';
   }
 
   TextsBuilder _textsCustomization() {

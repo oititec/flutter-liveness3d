@@ -17,18 +17,41 @@ Encoding.default_external = Encoding::UTF_8
 default_platform(:android)
 
 platform :android do
+  EXAMPLE_DIR = File.expand_path("../..", __dir__)
+
   def kill_java_processes
     sh "TASKKILL /F /IM java.exe > nul 2>&1 || echo 'Nenhum processo Java para encerrar'"
+  end
+
+  def flutter_apk_path(variant)
+    File.join(EXAMPLE_DIR, "build/app/outputs/flutter-apk/app-#{variant}.apk")
   end
 
   desc "Enviar um novo build Beta para o Firebase App Distribution"
   lane :deploy do |options|
     kill_java_processes
-    sh "flutter clean && flutter build apk --debug"
+    Dir.chdir(EXAMPLE_DIR) do
+      sh "flutter clean && flutter build apk --debug"
+    end
     release_notes = options[:release_notes] || "Nenhuma nota adicionada."
     firebase_app_distribution(
       app: "1:437125553297:android:d4635f3f1a14a22da47330",
-      apk_path: "../build/app/outputs/apk/debug/app-debug.apk",
+      apk_path: flutter_apk_path("debug"),
+      groups: "mobile-android",
+      release_notes: release_notes
+    )
+  end
+
+  desc "Enviar um novo build Beta para o Firebase App Distribution"
+  lane :deploy_release do |options|
+    kill_java_processes
+    Dir.chdir(EXAMPLE_DIR) do
+      sh "flutter clean && flutter build apk --release"
+    end
+    release_notes = options[:release_notes] || "Nenhuma nota adicionada."
+    firebase_app_distribution(
+      app: "1:437125553297:android:d4635f3f1a14a22da47330",
+      apk_path: flutter_apk_path("release"),
       groups: "mobile-android",
       release_notes: release_notes
     )
