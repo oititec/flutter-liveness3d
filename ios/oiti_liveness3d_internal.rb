@@ -60,6 +60,25 @@ module OitiLiveness3dInternal
     end
 
     patch_oiti_liveness3d_debug_xcconfig(sandbox)
+    sanitize_release_xcconfigs(sandbox)
+  end
+
+  def sanitize_release_xcconfigs(sandbox)
+    pods_runner_dir = File.join(sandbox.root, 'Target Support Files', 'Pods-Runner')
+    %w[release profile].each do |configuration|
+      path = File.join(pods_runner_dir, "Pods-Runner.#{configuration}.xcconfig")
+      next unless File.exist?(path)
+
+      File.write(path, strip_debug_references(File.read(path)))
+    end
+  end
+
+  def strip_debug_references(content)
+    content
+      .gsub(/"[^"]*OILiveness3D-Debug[^"]*"/, '')
+      .gsub(/"[^"]*OILiveness3D_FT-Debug[^"]*"/, '')
+      .gsub(/[ \t]{2,}/, ' ')
+      .gsub(/ = \s+/, ' = ')
   end
 
   def patch_oiti_liveness3d_debug_xcconfig(sandbox)
