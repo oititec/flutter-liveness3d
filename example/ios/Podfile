@@ -32,10 +32,7 @@ flutter_ios_podfile_setup
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
-  
-  pod 'OILiveness3D_FT', git: 'https://github.com/oititec/ios-liveness3d-ft.git', branch: 'feature/29846'
-  pod 'OILiveness3D', git: 'https://github.com/oititec/ios-liveness-3d.git', branch: 'feature/29846-facetec-update'
-  pod 'Wormholy'
+  pod 'OILiveness3D-Debug', '3.15.0', :configurations => ['Debug']
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end

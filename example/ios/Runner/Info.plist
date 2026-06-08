@@ -32,6 +32,16 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Ativar a câmera</string>
+	<!-- #region agent log -->
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Debug logging to local network</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<!-- #endregion -->
+
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

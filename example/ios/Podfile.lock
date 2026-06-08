@@ -2,20 +2,20 @@ PODS:
   - Flutter (1.0.0)
   - OICommons (2.1.2)
   - OIComponents (1.8.0)
-  - OILiveness3D (3.14.0):
+  - OILiveness3D (3.15.0):
     - OICommons (~> 2.1.2)
-    - OIComponents (= 1.8.0)
-    - OILiveness3D/Release (= 3.14.0)
+    - OIComponents (~> 1.8.0)
     - OILiveness3D_FT (= 9.7.121)
     - OINetwork (~> 2.1.2)
     - OISecurity (~> 4.2)
-  - OILiveness3D/Release (3.14.0):
+  - OILiveness3D-Debug (3.15.0):
     - OICommons (~> 2.1.2)
-    - OIComponents (= 1.8.0)
-    - OILiveness3D_FT (= 9.7.121)
+    - OIComponents (~> 1.8.0)
+    - OILiveness3D_FT-Debug (= 9.7.121)
     - OINetwork (~> 2.1.2)
     - OISecurity (~> 4.2)
   - OILiveness3D_FT (9.7.121)
+  - OILiveness3D_FT-Debug (9.7.121)
   - OINetwork (2.1.2):
     - OICommons (~> 2.1.0)
   - OISecurity (4.2.0):
@@ -23,56 +23,42 @@ PODS:
     - OINetwork (~> 2.1.2)
   - oiti_liveness3d (4.10.0):
     - Flutter
-    - OILiveness3D (= 3.14.0)
-  - Wormholy (1.7.0)
+    - OILiveness3D (= 3.15.0)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - OILiveness3D (from `https://github.com/oititec/ios-liveness-3d.git`, branch `feature/29846-facetec-update`)
-  - OILiveness3D_FT (from `https://github.com/oititec/ios-liveness3d-ft.git`, branch `feature/29846`)
+  - OILiveness3D-Debug (= 3.15.0)
   - oiti_liveness3d (from `.symlinks/plugins/oiti_liveness3d/ios`)
-  - Wormholy
 
 SPEC REPOS:
-  https://github.com/oititec/ios-artifactory:
+  https://github.com/oititec/ios-artifactory.git:
     - OICommons
     - OIComponents
+    - OILiveness3D
+    - OILiveness3D-Debug
+    - OILiveness3D_FT
+    - OILiveness3D_FT-Debug
     - OINetwork
     - OISecurity
-  trunk:
-    - Wormholy
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  OILiveness3D:
-    :branch: feature/29846-facetec-update
-    :git: https://github.com/oititec/ios-liveness-3d.git
-  OILiveness3D_FT:
-    :branch: feature/29846
-    :git: https://github.com/oititec/ios-liveness3d-ft.git
   oiti_liveness3d:
     :path: ".symlinks/plugins/oiti_liveness3d/ios"
-
-CHECKOUT OPTIONS:
-  OILiveness3D:
-    :commit: 69e0a55566147663aa4624d1108ec32813200474
-    :git: https://github.com/oititec/ios-liveness-3d.git
-  OILiveness3D_FT:
-    :commit: 33523246491c7a27dc498b11d0fedb43b68d271e
-    :git: https://github.com/oititec/ios-liveness3d-ft.git
 
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   OICommons: cd3bf615b5c80c6d33a0bf993c75ecf6d5e38ae8
   OIComponents: 06145be8e23f9d3e89a4ee9293139849e21b22da
-  OILiveness3D: a7c0a811b8a8f820142aeabd5ef64cf6e92bd431
-  OILiveness3D_FT: 07737023734f938a8fbc446171042bf7909778b9
+  OILiveness3D: 82cd7ee22c4ea5319f00a68a931f8bcd4b4210ff
+  OILiveness3D-Debug: b595ec498d246daddd476eca4b350c2837469a5d
+  OILiveness3D_FT: 6ceb05be7e1574d8918d6f633e5e3e14ab889c89
+  OILiveness3D_FT-Debug: 3245c26826953abb0afe4cb19c36c90ea4d2a8cc
   OINetwork: 026528034592540763350410d1ce7c0ddb1349f5
   OISecurity: c8074823189df9c4bc4196e1be362064f9e75c80
-  oiti_liveness3d: eb08bdcba24d655ce5d3d214c8ffd2d1524c9361
-  Wormholy: ab1c8c2f02f58587a0941deb0088555ffbf039a1
+  oiti_liveness3d: 7eb80e8c1b0b9c7973fce4800edb6fe1189da2cf
 
-PODFILE CHECKSUM: 9d9b99353eea55f3450ff00dcfb4bf9441af47ad
+PODFILE CHECKSUM: a500a99b187ae9545198fdbccdb22eef42eeb2f8
 
 COCOAPODS: 1.16.2
