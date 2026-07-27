@@ -34,6 +34,7 @@ target 'Runner' do
   use_modular_headers!
   
   pod 'Wormholy'
+  pod 'OILiveness3D', git: 'https://github.com/oititec/ios-liveness-3d.git', branch: 'chore/31198-facetec-update'
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
