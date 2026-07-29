@@ -4,14 +4,7 @@ PODS:
   - OIComponents (1.8.0)
   - OILiveness3D (3.16.0):
     - OICommons (~> 2.1.2)
-    - OIComponents (= 1.8.0)
-    - OILiveness3D/Release (= 3.16.0)
-    - OILiveness3D_FT (= 9.7.130)
-    - OINetwork (~> 2.1.2)
-    - OISecurity (~> 4.2)
-  - OILiveness3D/Release (3.16.0):
-    - OICommons (~> 2.1.2)
-    - OIComponents (= 1.8.0)
+    - OIComponents (~> 1.8.0)
     - OILiveness3D_FT (= 9.7.130)
     - OINetwork (~> 2.1.2)
     - OISecurity (~> 4.2)
@@ -28,7 +21,6 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - OILiveness3D (from `https://github.com/oititec/ios-liveness-3d.git`, branch `chore/31198-facetec-update`)
   - oiti_liveness3d (from `.symlinks/plugins/oiti_liveness3d/ios`)
   - Wormholy
 
@@ -36,6 +28,7 @@ SPEC REPOS:
   https://github.com/oititec/ios-artifactory:
     - OICommons
     - OIComponents
+    - OILiveness3D
     - OILiveness3D_FT
     - OINetwork
     - OISecurity
@@ -45,28 +38,20 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  OILiveness3D:
-    :branch: chore/31198-facetec-update
-    :git: https://github.com/oititec/ios-liveness-3d.git
   oiti_liveness3d:
     :path: ".symlinks/plugins/oiti_liveness3d/ios"
-
-CHECKOUT OPTIONS:
-  OILiveness3D:
-    :commit: ac6d7a27845b2a1d701840eea8f0049521790f3b
-    :git: https://github.com/oititec/ios-liveness-3d.git
 
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   OICommons: cd3bf615b5c80c6d33a0bf993c75ecf6d5e38ae8
   OIComponents: 06145be8e23f9d3e89a4ee9293139849e21b22da
-  OILiveness3D: 7114bf480ac83482c3b548900e7189cfc011aadf
+  OILiveness3D: 9b11da71ad6bcba0ee3ae163b3829abfe98486e2
   OILiveness3D_FT: 9d2ed98ef288de2a8f08a32e52638c3f19d2f64a
   OINetwork: 026528034592540763350410d1ce7c0ddb1349f5
   OISecurity: c8074823189df9c4bc4196e1be362064f9e75c80
   oiti_liveness3d: a50aa7c8b5633365aa9f4741d997852b7c0e9eeb
   Wormholy: ab1c8c2f02f58587a0941deb0088555ffbf039a1
 
-PODFILE CHECKSUM: 936073a145fbba044598e911354a497ffc55d12f
+PODFILE CHECKSUM: 3a1faa76a57984e42ca1fefa46de6ca78aaaccd0
 
 COCOAPODS: 1.16.2
